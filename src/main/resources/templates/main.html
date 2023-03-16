@@ -8,6 +8,7 @@
 <script src="/static/js/main.js" th:src="@{/js/main.js}" defer></script>
 <head>
 	<meta charset="UTF-8">
+	<meta th:name="${_csrf.parameterName}" th:content="${_csrf.token}">
 	<title>KOREAIT KYOBO 교보문고</title>
 </head>
 <body>

@@ -1,6 +1,7 @@
+const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute("content")
 const BookContainer = document.getElementById('book_container');
 const CartBtn = document.getElementById('cart_btn');
-CartBtn.parentElement.previousElementSibling
+
 get_all_books()
 
 CartBtn.onclick = () => {
@@ -10,8 +11,7 @@ CartBtn.onclick = () => {
         //체크박스가 선택되어 있다면
         if(checkbox.checked){
             const bookISBN = checkbox.parentElement.previousElementSibling.value
-            bookISBNArray.push(bookISBN)
-            console.log(checkbox)
+            bookISBNArray.push({isbn : bookISBN})
         }
     }
     if(bookISBNArray.length === 0){
@@ -26,7 +26,8 @@ function insert_cart(bookISBNArray){
         {
             method: 'POST',
             headers:{
-                "Content-Type": 'application/json'
+                "content-Type": 'application/json',
+                "X-CSRF-TOKEN": csrfToken
             },
             body: JSON.stringify(bookISBNArray)
         })
@@ -50,12 +51,12 @@ function create_book_list(bookList){
        BookContainer.insertAdjacentHTML('beforeend', '' +
            '<div class="book">\n' +
            `<input class="product_isbn" type="hidden" value="${book.isbn}">`+
-           `\t\t\t\t<div class="check"><input class="cart_check_btn" type="checkbox"></div>\n` +
-           `\t\t\t\t<div class="product_img"><img src="" alt="상품이미지"></div>\n` +
-           `\t\t\t\t<div class="product_title"><h4>${book.title}</h4></div>\n` +
-           `\t\t\t\t<div class="product_author"><span>${book.author} * ${book.publisher}</span></div>\n` +
-           `\t\t\t\t<div class="product_price"><span>${book.price}원</span></div>\n` +
-           `\t\t\t\t<div class="heart"><input type="button" value="하트"></div>\n` +
+           `    <div class="check"><input class="cart_check_btn" type="checkbox"></div>\n` +
+           `    <div class="product_img"><img src="" alt="상품이미지"></div>\n` +
+           `    <div class="product_title"><h4>${book.title}</h4></div>\n` +
+           `    <div class="product_author"><span>${book.author} * ${book.publisher}</span></div>\n` +
+           `    <div class="product_price"><span>${book.price}원</span></div>\n` +
+           `    <div class="heart"><input type="button" value="하트"></div>\n` +
            '</div>')
     }
 }
