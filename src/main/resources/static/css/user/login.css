@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    margin: 24px 0;
+}
+
+a {
+    text-decoration: none;
+    color: gray;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    text-align: center;
+    margin: auto;
+    padding-top: 100px;
+}
+
+form input {
+    width: 100%;
+    height: 40px;
+}
+
+.input_box {
+    margin-bottom: 20px;
+}
+
+.option_box {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.option_box input {
+    width: 20px;
+    height: 10px;
+}
+
+
+

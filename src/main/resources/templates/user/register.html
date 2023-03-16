@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<link rel="stylesheet" href="/static/css/user/register.css" th:href="@{/css/user/register.css}">
+<script src="/js/user/register.js" th:src="@{/js/user/register.js}" defer></script>
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+</head>
+<body>
+    <form th:action="@{/user/register}" th:method="post">
+        <h1>교보문고 회원가입</h1>
+        <div class="info_box">
+            <p>아이디(이메일)</p>
+            <div class="flex_text_btn">
+                <input type="text" name="email">
+                <input type="button" value="중복체크" onclick="email_authenticated()">
+            </div>
+        </div>
+        <div class="info_box">
+            <p>비밀번호</p>
+            <input type="text" name="password">
+        </div>
+        <div class="info_box">
+            <p>비밀번호 재확인</p>
+            <input type="text">
+        </div>
+        <div class="info_box">
+            <p>이름</p>
+            <input type="text" name="name">
+        </div>
+        <div class="info_box">
+            <p>생년월일</p>
+            <div id="birth">
+                <input type="hidden" name="birth">
+                <input type="text" id="year" placeholder="(년)4자리" maxlength="4">
+                <select id="month">
+                    <option>월</option>
+                </select>
+                <select id="day">
+                    <option>일</option>
+                </select>
+            </div>
+        </div>
+        <div class="info_box">
+            <p>휴대전화</p>
+            <div class="flex_text_btn">
+                <input type="text" id="phone" placeholder="전화번호를 입력하세요" maxlength="11">
+                <input type="button" value="인증번호 받기" onclick="phoneNumber_authenticate()">
+                <input type="hidden" name="phone">
+            </div>
+            <div class="flex_text_btn">
+                <input type="text" name="phone_auth" placeholder="인증번호를 입력하세요">
+                <input type="button"  value="인증확인" onclick="phoneNumber_authenticate_confirm()">
+            </div>
+        </div>
+        <input id="register_btn" type="button" value="회원가입">
+        <input id="back_btn" type="button" value="돌아가기">
+    </form>
+</body>
+</html>

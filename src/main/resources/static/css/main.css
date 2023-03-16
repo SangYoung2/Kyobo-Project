@@ -1,0 +1,86 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*===== CommonOption =====*/
+.padding_lr_300 {
+    padding: 0 300px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+/*===== Header =====*/
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    line-height: 80px;
+}
+
+.header_left {
+    width: 600px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    height: 60px;
+}
+
+.search_bar {
+    display: flex;
+    width: 400px ;
+    height: 40px;
+    padding: 0 15px;
+    border: 1px solid black;
+    border-radius: 20px;
+}
+
+.search_bar > select {
+    flex: 1;
+    border: none;
+}
+
+.search_bar > input {
+    flex: 3;
+    border: none;
+}
+
+
+/*===== Section 1 =====*/
+#book_nav {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 0;
+}
+
+.book_nav_right {
+    display: flex;
+}
+
+.book_nav_right > input {
+    margin-right: 10px;
+}
+
+/*===== Section 2 =====*/
+#book_container {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 50px;
+    margin-top: 30px;
+}
+
+.book {
+    display: flex;
+    flex-direction: column;
+    /*width: 300px;*/
+    /*height: 300px;*/
+}

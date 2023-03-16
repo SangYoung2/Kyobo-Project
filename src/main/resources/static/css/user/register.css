@@ -1,0 +1,75 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+input {
+    height: 40px;
+    font-size: 16px;
+    width: 100%;
+}
+
+input::placeholder {
+    font-size: 14px;
+}
+
+
+form{
+    text-align: center;
+    width: 500px;
+    margin: auto;
+}
+
+form > h1 {
+    margin: 20px 0;
+}
+
+form > input {
+    margin-bottom: 5px;
+}
+
+#birth {
+    display: flex;
+    justify-content: space-between;
+}
+
+#year, #month, #day {
+    flex: 1;
+    height: 40px;
+    font-size: 16px;
+}
+
+#month {
+    margin: 0 5px;
+}
+
+.info_box{
+    text-align: left;
+    margin: 20px 0;
+}
+
+.info_box > p {
+    margin: 5px 0;
+}
+
+.flex_text_btn {
+    display: flex;
+    margin-bottom: 5px;
+    border: 1px solid gray;
+    border-radius: 2px;
+}
+
+.flex_text_btn > input {
+    border: 0;
+}
+
+.flex_text_btn > input[type = text]{
+    flex: 3;
+}
+
+.flex_text_btn > input[type = button]{
+    flex: 1;
+    cursor: pointer;
+}
+
