@@ -1,39 +1,19 @@
 <!DOCTYPE html>
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 >
-<link rel="stylesheet" href="/static/css/main.css" th:href="@{/css/main.css}">
-<script src="/static/js/main.js" th:src="@{/js/main.js}" defer></script>
 <head>
 	<meta charset="UTF-8">
 	<meta th:name="${_csrf.parameterName}" th:content="${_csrf.token}">
 	<title>KOREAIT KYOBO 교보문고</title>
+	<link rel="stylesheet" href="/css/main/main.css" th:href="@{/css/main/main.css}">
+	<link rel="stylesheet" href="/static/css/main/header.css" th:href="@{/css/main/header.css}">
+	<script src="/js/main/main.js" th:src="@{/js/main/main.js}" defer></script>
+	<script src="https://kit.fontawesome.com/8b1463211e.js" crossorigin="anonymous"></script>
 </head>
 <body>
-	<header class="padding_lr_300">
-		<div class="header_left">
-			<img class="logo" src="/static/img/main/kyobo_logo.png" alt="logo">
-			<div class="search_bar">
-				<select>
-					<option value="통합검색">통합검색</option>
-				</select>
-				<input type="text">
-			</div>
-		</div>
-		<div class="header_right">
-			<th:block sec:authorize="!isAuthenticated()">
-				<a href="/user/login">로그인</a>
-				<a href="/user/register">회원가입</a>
-			</th:block>
-			<th:block sec:authorize="isAuthenticated()">
-				<a href="/user/logout">로그아웃</a>
-				<a href="/user/cart">장바구니</a>
-				<a href="/user/mypage">마이페이지</a>
-			</th:block>
-		</div>
-	</header>
+	<th:block th:replace="~{/main/header :: header}"></th:block>
 	<hr>
 	<main class="padding_lr_300">
 		<section id="book_nav">

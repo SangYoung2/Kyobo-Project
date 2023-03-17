@@ -1,18 +1,22 @@
 package com.kyobo.koreait.controller;
 
+import com.kyobo.koreait.domain.dtos.CartDTO;
+import com.kyobo.koreait.domain.dtos.HeartDTO;
+import com.kyobo.koreait.domain.vos.CartVO;
 import com.kyobo.koreait.domain.vos.UserVO;
 import com.kyobo.koreait.service.UserService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Log4j2
 @Controller
@@ -29,6 +33,11 @@ public class UserController {
     @PostMapping("/login")
     public String login_user_post() {
         return "redirect:/";
+    }
+
+    @GetMapping("/logout")
+    public void logout(){
+        log.info("===== 유저 로그아웃 =====");
     }
 
     @GetMapping("/register")
@@ -54,8 +63,8 @@ public class UserController {
         if(phoneAuthenticated == null // 휴대폰 인증을 거치지 않고 왔거나
                 || userEmail == null  // 이메일 중복체크를 하지 않았거나
                 || !phoneAuthenticated // 인증이 false 이거나 (실패했거나)
-                || userVO.getEmail().equals(userEmail) // 인증받은 이메일과 가입할 이메일이 다르거나
-                || userVO.getPhone().equals(authenticateNumber) // 인증받은 휴대폰과 가입할 휴대폰이 다르거나
+                || !userVO.getEmail().equals(userEmail) // 인증받은 이메일과 가입할 이메일이 다르거나
+                || !userVO.getPhone().equals(authenticateNumber) // 인증받은 휴대폰과 가입할 휴대폰이 다르거나
                 ){
             log.info("에러!");
             return "/error/main";
@@ -70,5 +79,38 @@ public class UserController {
     @GetMapping("/mypage")
     public void mypage_user(){
         log.info(" ===== user_mypage =====");
+    }
+
+    @ResponseBody
+    @GetMapping("/cart")
+    public List<CartDTO> get_cart(
+            @AuthenticationPrincipal UserDetails userDetails
+    ){
+        log.info(" ===== 장바구니 페이지 (cart) =====");
+        log.info(userService.get_cart(userDetails.getUsername()));
+        return userService.get_cart(userDetails.getUsername());
+    };
+
+    @ResponseBody
+    @PostMapping("/cart")
+    public boolean insert_cart(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @RequestBody List<CartVO> cartVOS
+    ){
+        log.info("===== insert_cart =====");
+        log.info("cartDTOS: " + cartVOS);
+        return userService.insert_books_in_cart(userDetails, cartVOS);
+    }
+
+    @ResponseBody
+    @PostMapping("/heart")
+    public boolean insert_heart(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @RequestBody List<HeartDTO> heartDTOS
+    ){
+        log.info("===== insert_heart =====");
+        log.info("heartDTOS: " + heartDTOS);
+        return userService.insert_books_in_heart(userDetails, heartDTOS);
+
     }
 }

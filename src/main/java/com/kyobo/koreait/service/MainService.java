@@ -17,25 +17,5 @@ public class MainService {
 
     public List<BookVO> get_all_books(){return mainMapper.get_all_books();}
 
-    public boolean insert_books_in_cart(UserDetails userDetails, List<CartDTO> cartDTOS){
-//        forEach 방식
-//        for(CartDTO cartDTO : cartDTOS){
-//            cartDTO.setUserEmail(userDetails.getUsername());
-//        }
 
-        cartDTOS.parallelStream().forEach(cartDTO -> {
-            cartDTO.setUserEmail(userDetails.getUsername());
-        });
-
-        return mainMapper.insert_books_in_cart(cartDTOS);
-    }
-
-    public boolean insert_books_in_heart(UserDetails userDetails, List<HeartDTO> heartDTOS){
-
-        heartDTOS.parallelStream().forEach(heartDTO -> {
-            heartDTO.setUserEmail(userDetails.getUsername());
-        });
-
-        return mainMapper.insert_books_in_heart(heartDTOS);
-    }
 }

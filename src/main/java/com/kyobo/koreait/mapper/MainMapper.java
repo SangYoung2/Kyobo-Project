@@ -10,7 +10,5 @@ import java.util.List;
 @Mapper
 public interface MainMapper {
     List<BookVO> get_all_books();
-    boolean insert_books_in_cart(List<CartDTO> cartDTOS);
 
-    boolean insert_books_in_heart(List<HeartDTO> heartDTOS);
 }
