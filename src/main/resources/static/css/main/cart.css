@@ -10,6 +10,7 @@ li {
 
 /*==== Main ====*/
 main {
+    min-width: 1300px;
     margin-top: 100px;
     padding: 0 300px;
 }
@@ -17,11 +18,13 @@ main {
 /*==== order_process ====*/
 #order_process_container {
     display: flex;
+    min-width: 1300px;
     justify-content: space-between;
 }
 
 #order_process_container > ul {
     display: flex;
+
 }
 
 #order_process_container > ul > li:not(:last-child) {
@@ -47,6 +50,7 @@ main {
 
 /*==== cart_control_bar ====*/
 #cart_control_bar {
+    min-width: 1300px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -59,15 +63,21 @@ main {
 
 /*==== cart_book_info ====*/
 #cart_book_info_container {
+    min-width: 750px;
     display: inline-block;
     padding: 20px;
     width: 60%;
 }
 
 .cart_book_info {
-    margin: 30px 0;
-    height: 100px;
+    padding: 30px 10px;
+    border-bottom: 1px solid #eaeaea;
+    border-top: 1px solid #eaeaea;
     display: flex;
+}
+
+.cart_book_info:not(:first-child){
+    border-top: none;
 }
 
 .cart_book_info_left {
@@ -79,6 +89,20 @@ main {
     flex: 1;
 }
 
+.book_img {
+    margin: 0 1rem;
+}
+
+.title {
+    display: inline-block;
+    width: 300px;
+    word-break: keep-all;
+}
+
+.price {
+    margin-top: 5px;
+}
+
 .book_count {
     display: flex;
 }
@@ -86,6 +110,7 @@ main {
 /*==== order_container ====*/
 #order_container {
     display: inline-block;
+    float: right;
     width: 20%;
     height: 200px;
     padding: 10px 20px;
