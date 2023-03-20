@@ -52,4 +52,9 @@ public class UserService {
         return userMapper.insert_books_in_heart(heartDTOS);
     }
 
+    public boolean modify_cart_book_count(String userEmail, CartVO cartVO){
+        cartVO.setUserEmail(userEmail);
+        return userMapper.modify_cart_book_count(cartVO);
+    }
+
 }

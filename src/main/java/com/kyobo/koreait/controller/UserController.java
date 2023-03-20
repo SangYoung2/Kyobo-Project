@@ -6,6 +6,7 @@ import com.kyobo.koreait.domain.vos.CartVO;
 import com.kyobo.koreait.domain.vos.UserVO;
 import com.kyobo.koreait.service.UserService;
 import lombok.extern.log4j.Log4j2;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -100,6 +101,18 @@ public class UserController {
         log.info("===== insert_cart =====");
         log.info("cartDTOS: " + cartVOS);
         return userService.insert_books_in_cart(userDetails, cartVOS);
+    }
+
+    @ResponseBody
+    @PutMapping("/cart")
+    public boolean modify_cart(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @RequestBody CartVO cartVO
+    ){
+        log.info("===== PUT CART =====");
+        log.info("cartVO: " + cartVO);
+        log.info("userDetails: " + userDetails);
+        return userService.modify_cart_book_count(userDetails.getUsername(), cartVO);
     }
 
     @ResponseBody

@@ -26,4 +26,9 @@
             (null, #{heartDTOS.userEmail}, #{heartDTOS.bookISBN})
         </foreach>
     </insert>
+
+    <update id="modify_cart_book_count" parameterType="com.kyobo.koreait.domain.vos.CartVO">
+        UPDATE `cart_tbl` SET `bookCount` = #{cartVO.bookCount}
+        WHERE `userEmail` = #{cartVO.userEmail} AND `bookISBN` = #{cartVO.bookISBN}
+    </update>
 </mapper>

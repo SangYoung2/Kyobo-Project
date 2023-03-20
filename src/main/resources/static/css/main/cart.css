@@ -107,6 +107,16 @@ main {
     display: flex;
 }
 
+.book_count i {
+    cursor: pointer;
+}
+
+.book_count_value {
+    width: 30px;
+    margin: 0 5px;
+    text-align: center;
+}
+
 /*==== order_container ====*/
 #order_container {
     display: inline-block;
