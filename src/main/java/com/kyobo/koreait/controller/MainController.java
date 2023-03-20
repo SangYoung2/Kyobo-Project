@@ -38,4 +38,9 @@ public class MainController {
         return mainService.get_all_books();
     }
 
+    @GetMapping("/main/details/{bookISBN}")
+    public String main_book_details(){
+        return "/main/deatis";
+    }
+
 }

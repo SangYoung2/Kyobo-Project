@@ -25,4 +25,6 @@ public interface UserMapper {
     boolean modify_cart_book_count(CartVO cartVO);
 
     boolean insert_books_in_heart(List<HeartDTO> heartDTOS);
+
+    boolean delete_book_in_cart(List<CartVO> cartVOS);
 }

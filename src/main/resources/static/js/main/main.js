@@ -8,8 +8,6 @@ get_all_books()
 // 책 찜하기/장바구니 넣기 공통 처리 부분
 // (버튼 눌렀을 시 => 데이터 생성, 가능여부 체크)
 function insert_heart_cart_checked(userEmail, btn){
-    console.log(userEmail)
-    console.log(btn)
     if(userEmail === ''){
         alert("로그인을 해주셔야합니다.")
     }else {

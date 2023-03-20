@@ -27,12 +27,12 @@
 
         <div id="cart_control_bar">
             <div>
-                <input type="checkbox">
+                <input class="all_checked" type="checkbox" onclick="checkAll()">
                 <span>전체</span>
             </div>
             <div>
-                <input type="button" value="찜">
-                <input type="button" value="삭제">
+                <input id="heart" type="button" value="찜">
+                <input id="delete" type="button" value="삭제" onclick="delete_cart()">
             </div>
         </div>
 
@@ -64,7 +64,7 @@
             <div><span>배송비</span><span>price</span></div>
             <hr>
             <div><b>결제 예정 금액</b><b>price</b></div>
-            <input type="button" value="주문하기">
+            <input class="order_btn" type="button" value="주문하기">
         </div>
     </main>
 </body>

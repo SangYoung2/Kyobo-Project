@@ -10,6 +10,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CartDTO {
+    private String bookISBN;
     private int no;
     private int bookCount;
     private String title;

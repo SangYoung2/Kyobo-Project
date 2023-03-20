@@ -116,6 +116,18 @@ public class UserController {
     }
 
     @ResponseBody
+    @DeleteMapping("/cart")
+    public boolean delete_cart(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @RequestBody List<CartVO> cartVOS
+    ){
+        log.info("===== DELETE CART =====");
+
+        return userService.delete_book_in_cart(userDetails, cartVOS);
+    }
+
+
+    @ResponseBody
     @PostMapping("/heart")
     public boolean insert_heart(
             @AuthenticationPrincipal UserDetails userDetails,
