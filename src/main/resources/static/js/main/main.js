@@ -25,13 +25,14 @@ function insert_heart_cart_checked(userEmail, btn){
             alert('상품을 하나라도 선택해주세요!')
         }else {
             console.log(bookISBNArray)
+            console.log(btn)
             insert(btn, bookISBNArray)
         }
     }
 }
 
 function insert(clickedBtn, bookISBNArray){
-    const requestURL = clickedBtn === HeartBtn ? '/main/heart' : '/main/cart'
+    const requestURL = clickedBtn.getAttribute('id') === 'heart_btn' ? '/user/heart' : '/user/cart'
     fetch(requestURL,
         {
             method: 'POST',

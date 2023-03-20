@@ -69,29 +69,35 @@ function checkAll(){
 
 function delete_cart(){
     const bookISBNArray = [];
-    const CartBookInfo = document.querySelectorAll(".cart_book_info")
     const CheckBox = document.getElementsByName('check')
     DeleteBtn.onclick = () => {
-        CartBookInfo.forEach((x) => {
-            if (CheckBox.checked){
-                const bookISBN = CheckBox.nextElementSibling;
+        CheckBox.forEach(x => {
+            if (x.checked){
+                const bookISBN = x.nextElementSibling;
                 const bookInfoObj = {bookISBN : bookISBN.value}
                 bookISBNArray.push(bookInfoObj);
             }
         })
-        fetch('/user/cart', {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                "X-CSRF-TOKEN": csrfToken
-            },
-            body: JSON.stringify(bookISBNArray)})
-            .then(value => value.text())
-            .then(value => {
-                if(value == 'true') get_cart();
-            })
-            .catch(reason => {
-                console.log(reason)});
+        console.log(bookISBNArray)
+        if(bookISBNArray.length < 1){
+            alert('한개 이상을 선택 하셔야 합니다.')
+        }else {
+            fetch('/user/cart', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    "X-CSRF-TOKEN": csrfToken
+                },
+                body: JSON.stringify(bookISBNArray)})
+                .then(value => value.text())
+                .then(value => {
+                    if(value === 'true'){
+                        get_cart();
+                        bookISBNArray.splice(0, bookISBNArray.length)}
+                })
+                .catch(reason => {
+                    console.log(reason)});
+        }
     }
 }
 

@@ -122,7 +122,7 @@ public class UserController {
             @RequestBody List<CartVO> cartVOS
     ){
         log.info("===== DELETE CART =====");
-
+        log.info("cartVOS:" + cartVOS);
         return userService.delete_book_in_cart(userDetails, cartVOS);
     }
 
