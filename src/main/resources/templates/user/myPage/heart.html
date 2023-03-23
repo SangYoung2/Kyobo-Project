@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+	<meta charset="UTF-8">
+	<meta th:name="${_csrf.parameterName}" th:content="${_csrf.token}">
+	<title>찜 목록</title>
+	<link rel="stylesheet" href="/static/css/main/header.css" th:href="@{/css/main/header.css}">
+	<link rel="stylesheet" href="/static/css/user/myPage/heart.css" th:href="@{/css/user/myPage/heart.css}">
+	<script src="/static/js/user/myPage/heart.js" th:src="@{/js/user/myPage/heart.js}" defer></script>
+</head>
+<body>
+	<th:block th:replace="~{/main/header :: header}"></th:block>
+	<hr>
+	<section>
+		<h2>찜 목록</h2>
+		<div id="heart_page_control_bar">
+			<div>
+				<input id="all_checked" type="checkbox" th:onclick="checkAll()"> 전체 선택
+			</div>
+			<div>
+				<input type="button" value="삭제" th:onclick="delete_heart_books()">
+			</div>
+		</div>
+		<div id="heart_book_container">
+			<div class="heart_books">
+				<input type="checkbox">
+				<img src="/static/img/book/1.jpg"  alt="책 이미지">
+				<h4>title</h4>
+				<span>저자</span>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

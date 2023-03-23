@@ -7,9 +7,9 @@
 	<meta charset="UTF-8">
 	<meta th:name="${_csrf.parameterName}" th:content="${_csrf.token}">
 	<title>KOREAIT KYOBO 교보문고</title>
-	<link rel="stylesheet" href="/css/main/main.css" th:href="@{/css/main/main.css}">
+	<link rel="stylesheet" href="/css/main/home.css" th:href="@{/css/main/home.css}">
 	<link rel="stylesheet" href="/static/css/main/header.css" th:href="@{/css/main/header.css}">
-	<script src="/js/main/main.js" th:src="@{/js/main/main.js}" defer></script>
+	<script src="/js/main/home.js" th:src="@{/js/main/home.js}" defer></script>
 	<script src="https://kit.fontawesome.com/8b1463211e.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -20,18 +20,26 @@
 			<span>전체 00건</span>
 			<div class="book_nav_right">
 				<input type="hidden" th:value="${#authentication.getName()}">
-				<input id="heart_btn" type="button" value="하트" onclick="insert_heart_cart_checked('test', this)">
-				<input id="cart_btn" type="button" value="장바구니 담기" onclick="insert_heart_cart_checked('test', this)">
-				<select th:onclick="">
-					<option value="">2개씩 보기</option>
-					<option value="">3개씩 보기</option>
-					<option value="">5개씩 보기</option>
+				<input id="heart_btn" type="button" value="하트" th:onclick="insert_heart_cart_checked([[${#authentication.getName()}]], this)">
+				<input id="cart_btn" type="button" value="장바구니 담기" th:onclick="insert_heart_cart_checked([[${#authentication.getName()}]], this)">
+				<select id="search_result_order_select" default="">
+					<option value="rating">인기순</option>
+					<option value="orderCount">판매량순</option>
+					<option value="">최신순</option>
+					<option value="title">상품명순</option>
+				</select>
+				<select id="search_result_count_select">
+					<option value="8">8개씩 보기</option>
+					<option value="12">12개씩 보기</option>
+					<option value="16">16개씩 보기</option>
 				</select>
 			</div>
 		</section>
 		<hr>
 		<section id="book_container">
 		</section>
+		<div id="book_page_list">
+		</div>
 	</main>
 </body>
 </html>

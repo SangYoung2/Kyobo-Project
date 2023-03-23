@@ -1,10 +1,7 @@
 const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute("content")
 const CartBookInfoContainer = document.getElementById('cart_book_info_container')
 const OrderContainer = document.getElementById('order_container')
-
 const AllChecked = document.querySelector('.all_checked')
-const HeartBtn = document.getElementById('heart')
-const DeleteBtn = document.getElementById('delete')
 
 get_cart()
 
@@ -67,37 +64,39 @@ function checkAll(){
     }
 }
 
-function delete_cart(){
+function delete_heart_cart(btn){
     const bookISBNArray = [];
     const CheckBox = document.getElementsByName('check')
-    DeleteBtn.onclick = () => {
-        CheckBox.forEach(x => {
-            if (x.checked){
-                const bookISBN = x.nextElementSibling;
-                const bookInfoObj = {bookISBN : bookISBN.value}
-                bookISBNArray.push(bookInfoObj);
-            }
-        })
-        console.log(bookISBNArray)
-        if(bookISBNArray.length < 1){
-            alert('한개 이상을 선택 하셔야 합니다.')
-        }else {
-            fetch('/user/cart', {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                    "X-CSRF-TOKEN": csrfToken
-                },
-                body: JSON.stringify(bookISBNArray)})
-                .then(value => value.text())
-                .then(value => {
-                    if(value === 'true'){
-                        get_cart();
-                        bookISBNArray.splice(0, bookISBNArray.length)}
-                })
-                .catch(reason => {
-                    console.log(reason)});
+    CheckBox.forEach(x => {
+        if (x.checked){
+            const bookISBN = x.nextElementSibling;
+            const bookInfoObj = {bookISBN : bookISBN.value}
+            bookISBNArray.push(bookInfoObj);
         }
+    })
+    console.log(bookISBNArray)
+    if(bookISBNArray.length < 1){
+        alert('한개 이상을 선택 하셔야 합니다.')
+    }else {
+        const requestURL = btn === 'heart' ? '/user/heart' : '/user/cart'
+        const requestMethod = btn === 'heart' ? 'POST' : 'DELETE'
+        console.log(requestURL)
+        console.log(requestMethod)
+        fetch(requestURL, {
+            method: requestMethod,
+            headers: {
+                'Content-Type': 'application/json',
+                "X-CSRF-TOKEN": csrfToken
+            },
+            body: JSON.stringify(bookISBNArray)})
+            .then(value => value.text())
+            .then(value => {
+                if(value === 'true'){
+                    get_cart();
+                    bookISBNArray.splice(0, bookISBNArray.length)}
+            })
+            .catch(reason => {
+                console.log(reason)});
     }
 }
 
@@ -126,3 +125,4 @@ function modify_cart(btn , operator){
         })
 
 }
+

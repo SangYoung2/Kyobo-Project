@@ -6,4 +6,18 @@
     <select id="get_all_books" resultType="com.kyobo.koreait.domain.vos.BookVO">
         SELECT * FROM `book_tbl`;
     </select>
+
+    <select id="get_book_by_isbn" resultType="com.kyobo.koreait.domain.vos.BookVO">
+        SELECT * FROM `book_tbl` WHERE ISBN = #{bookISBN}
+    </select>
+
+    <select id="get_all_books_by_condition" resultType="com.kyobo.koreait.domain.vos.BookVO">
+        SELECT * FROM kyobo_db.book_tbl WHERE
+        `title` LIKE CONCAT('%', #{searchKeyword} ,'%')
+        OR
+        `author` LIKE CONCAT('%', #{searchKeyword} ,'%')
+        OR
+        `publisher` LIKE CONCAT('%', #{searchKeyword} ,'%')
+        ORDER BY ${order}
+    </select>
 </mapper>

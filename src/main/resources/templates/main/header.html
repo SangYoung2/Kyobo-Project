@@ -14,11 +14,11 @@
 <header th:fragment="header">
     <div class="header_left">
         <a href="/" th:href="@{/}"><img class="logo" src="/static/img/main/kyobo_logo.png" th:src="@{/img/main/kyobo_logo.png}" alt="logo"></a>
-        <div class="search_bar">
+        <div id="search_bar">
             <select>
                 <option value="통합검색">통합검색</option>
             </select>
-            <input type="text">
+            <input type="text" placeholder="검색어를 입력해 주세요">
         </div>
     </div>
     <div class="header_right">
@@ -29,7 +29,7 @@
         <th:block sec:authorize="isAuthenticated()">
             <a href="/user/logout">로그아웃</a>
             <a href="/main/cart">장바구니</a>
-            <a href="/user/mypage">마이페이지</a>
+            <a href="/user/myPage/main">마이페이지</a>
         </th:block>
     </div>
 </header>

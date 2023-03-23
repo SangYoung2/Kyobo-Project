@@ -27,6 +27,13 @@
         </foreach>
     </insert>
 
+    <select id="get_book_in_heart" resultType="com.kyobo.koreait.domain.vos.BookVO">
+        SELECT BOOK.* FROM kyobo_db.heart_tbl HEART
+        INNER JOIN `book_tbl` BOOK
+        ON BOOK.ISBN = HEART.bookISBN
+        WHERE HEART.userEmail = #{userEmail}
+    </select>
+
     <update id="modify_cart_book_count" parameterType="com.kyobo.koreait.domain.vos.CartVO">
         UPDATE `cart_tbl` SET `bookCount` = #{bookCount}
         WHERE `userEmail` = #{userEmail} AND `bookISBN` = #{bookISBN}

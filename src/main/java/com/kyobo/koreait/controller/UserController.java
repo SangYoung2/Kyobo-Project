@@ -2,7 +2,9 @@ package com.kyobo.koreait.controller;
 
 import com.kyobo.koreait.domain.dtos.CartDTO;
 import com.kyobo.koreait.domain.dtos.HeartDTO;
+import com.kyobo.koreait.domain.vos.BookVO;
 import com.kyobo.koreait.domain.vos.CartVO;
+import com.kyobo.koreait.domain.vos.HeartVO;
 import com.kyobo.koreait.domain.vos.UserVO;
 import com.kyobo.koreait.service.UserService;
 import lombok.extern.log4j.Log4j2;
@@ -17,6 +19,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.awt.print.Book;
 import java.util.List;
 
 @Log4j2
@@ -77,8 +80,8 @@ public class UserController {
     }
 
     @PreAuthorize("isAuthenticated()")
-    @GetMapping("/mypage")
-    public void mypage_user(){
+    @GetMapping("/myPage/main")
+    public void myPage_user(){
         log.info(" ===== user_mypage =====");
     }
 
@@ -126,6 +129,10 @@ public class UserController {
         return userService.delete_book_in_cart(userDetails, cartVOS);
     }
 
+    @GetMapping("/myPage/heart")
+    public void heart_page(){
+
+    }
 
     @ResponseBody
     @PostMapping("/heart")
@@ -136,6 +143,26 @@ public class UserController {
         log.info("===== insert_heart =====");
         log.info("heartDTOS: " + heartDTOS);
         return userService.insert_books_in_heart(userDetails, heartDTOS);
+    }
 
+    @ResponseBody
+    @GetMapping("/heart")
+    public List<BookVO> get_books_in_heart(
+            @AuthenticationPrincipal UserDetails userDetails
+    ){
+
+        log.info("===== GET_BOOKS_IN_HEART");
+        return userService.get_book_in_heart(userDetails.getUsername());
+    }
+
+    @ResponseBody
+    @DeleteMapping("/heart")
+    public boolean delete_books_in_heart(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @RequestBody List<HeartVO> heartVOS
+    ){
+        log.info("===== DELETE CART =====");
+        log.info("cartVOS:" + heartVOS);
+        return userService.delete_book_in_heart(userDetails, heartVOS);
     }
 }

@@ -18,4 +18,5 @@ public class BookVO {
     private String introduce;
     private int price;
     private int rating;
+    private int orderCount;
 }

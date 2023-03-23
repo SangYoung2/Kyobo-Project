@@ -2,7 +2,9 @@ package com.kyobo.koreait.service;
 
 import com.kyobo.koreait.domain.dtos.CartDTO;
 import com.kyobo.koreait.domain.dtos.HeartDTO;
+import com.kyobo.koreait.domain.vos.BookVO;
 import com.kyobo.koreait.domain.vos.CartVO;
+import com.kyobo.koreait.domain.vos.HeartVO;
 import com.kyobo.koreait.domain.vos.UserVO;
 import com.kyobo.koreait.mapper.UserMapper;
 import lombok.extern.log4j.Log4j2;
@@ -43,6 +45,16 @@ public class UserService {
         return userMapper.insert_books_in_cart(cartVOS);
     }
 
+    public boolean modify_cart_book_count(String userEmail, CartVO cartVO){
+        cartVO.setUserEmail(userEmail);
+        return userMapper.modify_cart_book_count(cartVO);
+    }
+
+    public boolean delete_book_in_cart(UserDetails userDetails, List<CartVO> cartVOS){
+        cartVOS.parallelStream().forEach(vo -> vo.setUserEmail(userDetails.getUsername()));
+        return userMapper.delete_book_in_cart(cartVOS);
+    }
+
     public boolean insert_books_in_heart(UserDetails userDetails, List<HeartDTO> heartDTOS){
 
         heartDTOS.parallelStream().forEach(heartDTO -> {
@@ -52,14 +64,13 @@ public class UserService {
         return userMapper.insert_books_in_heart(heartDTOS);
     }
 
-    public boolean modify_cart_book_count(String userEmail, CartVO cartVO){
-        cartVO.setUserEmail(userEmail);
-        return userMapper.modify_cart_book_count(cartVO);
+    public List<BookVO> get_book_in_heart(String userEmail){
+        return userMapper.get_book_in_heart(userEmail);
     }
 
-    public boolean delete_book_in_cart(UserDetails userDetails, List<CartVO> cartVOS){
-        cartVOS.parallelStream().forEach(vo -> vo.setUserEmail(userDetails.getUsername()));
-        return userMapper.delete_book_in_cart(cartVOS);
+    public boolean delete_book_in_heart(UserDetails userDetails, List<HeartVO> heartVOS) {
+        heartVOS.parallelStream().forEach(heartVO -> heartVO.setUserEmail(userDetails.getUsername()));
+        return userMapper.delete_book_in_heart(heartVOS);
     }
 
 }

@@ -20,7 +20,7 @@ header {
     height: 60px;
 }
 
-.search_bar {
+#search_bar {
     display: flex;
     width: 400px ;
     height: 40px;
@@ -29,12 +29,12 @@ header {
     border-radius: 20px;
 }
 
-.search_bar > select {
+#search_bar > select {
     flex: 1;
     border: none;
 }
 
-.search_bar > input {
+#search_bar > input {
     flex: 3;
     border: none;
 }
