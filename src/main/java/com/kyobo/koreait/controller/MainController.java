@@ -65,4 +65,11 @@ public class MainController {
         model.addAttribute("bookVO", bookVO);
         return "/main/details";
     }
+    
+    //방금 주문 내역 확인 페이지
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/main/order")
+    public void current_order_page(){
+        
+    }
 }

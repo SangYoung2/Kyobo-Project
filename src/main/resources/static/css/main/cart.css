@@ -10,6 +10,7 @@ li {
 
 /*==== Main ====*/
 main {
+    width: 100%;
     min-width: 1300px;
     margin-top: 100px;
     padding: 0 300px;
@@ -61,10 +62,15 @@ main {
     border-radius: 10px;
 }
 
+/*==== cart_main_container ====*/
+#cart_main_container {
+    min-width: 1300px;
+    display: flex;
+    justify-content: space-between;
+}
+
 /*==== cart_book_info ====*/
 #cart_book_info_container {
-    min-width: 750px;
-    display: inline-block;
     padding: 20px;
     width: 60%;
 }
@@ -90,6 +96,7 @@ main {
 }
 
 .book_img {
+    width: 100px;
     margin: 0 1rem;
 }
 
@@ -118,9 +125,10 @@ main {
 }
 
 /*==== order_container ====*/
-#order_container {
-    display: inline-block;
-    float: right;
+#order_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
     width: 20%;
     height: 200px;
     padding: 10px 20px;

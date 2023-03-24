@@ -7,10 +7,10 @@
     <meta charset="UTF-8">
     <meta th:name="${_csrf.parameterName}" th:content="${_csrf.token}">
     <title>장바구니</title>
-    <link rel="stylesheet" href="/css/main/header.css" th:href="@{/css/main/header.css}">
-    <link rel="stylesheet" href="/css/main/cart.css" th:href="@{/css/main/cart.css}">
+    <link rel="stylesheet" href="/static/css/main/header.css" th:href="@{/css/main/header.css}">
+    <link rel="stylesheet" href="/static/css/main/cart.css" th:href="@{/css/main/cart.css}">
     <script src="https://kit.fontawesome.com/8b1463211e.js" crossorigin="anonymous"></script>
-    <script src="/js/main/cart.js" th:src="@{/js/main/cart.js}" defer></script>
+    <script src="/static/js/main/cart.js" th:src="@{/js/main/cart.js}" defer></script>
 </head>
 <body>
     <th:block th:replace="~{/main/header :: header}"></th:block>
@@ -36,36 +36,38 @@
             </div>
         </div>
 
-        <section id="cart_book_info_container">
-            <div class="cart_book_info">
-                <div class="cart_book_info_left">
-                    <input type="checkbox">
-                    <img src="" alt="책이미지">
-                    <div class="book_common_info">
-                        <h3>title</h3>
-                        <span>price원</span>
+        <section id="cart_main_container">
+            <div id="cart_book_info_container">
+                <div class="cart_book_info">
+                    <div class="cart_book_info_left">
+                        <input type="checkbox">
+                        <img src="" alt="책이미지">
+                        <div class="book_common_info">
+                            <h3>title</h3>
+                            <span>price원</span>
+                        </div>
                     </div>
-                </div>
-                <div class="cart_book_info_right">
-                    <div class="book_price_container">
-                        <b>price</b>
-                        <div class="book_count">
-                            <i class="fa-solid fa-plus plus"></i>
-                            <input class="book_count_value" type="number" value="1">
-                            <i class="fa-solid fa-minus minus"></i>
+                    <div class="cart_book_info_right">
+                        <div class="book_price_container">
+                            <b>price</b>
+                            <div class="book_count">
+                                <i class="fa-solid fa-plus plus"></i>
+                                <input class="book_count_value" type="number" value="1">
+                                <i class="fa-solid fa-minus minus"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <hr>
             </div>
-            <hr>
+            <div id="order_container">
+                <div><span>상품금액</span><span>price</span></div>
+                <div><span>배송비</span><span>price</span></div>
+                <hr>
+                <div><b>결제 예정 금액</b><b>price</b></div>
+                <input id="order_btn" type="button" value="주문하기">
+            </div>
         </section>
-        <div id="order_container">
-            <div><span>상품금액</span><span>price</span></div>
-            <div><span>배송비</span><span>price</span></div>
-            <hr>
-            <div><b>결제 예정 금액</b><b>price</b></div>
-            <input class="order_btn" type="button" value="주문하기">
-        </div>
     </main>
 </body>
 </html>

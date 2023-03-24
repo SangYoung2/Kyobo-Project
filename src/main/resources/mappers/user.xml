@@ -39,6 +39,11 @@
         WHERE `userEmail` = #{userEmail} AND `bookISBN` = #{bookISBN}
     </update>
 
+    <update id="modify_book_count_in_cart_by_count" parameterType="list">
+        UPDATE `cart_tbl` SET `bookCount` = bookCount + #{bookCount}
+        WHERE `userEmail` = #{userEmail} AND `bookISBN` = #{bookISBN}
+    </update>
+
     <delete id="delete_book_in_cart" parameterType="java.util.List">
         DELETE FROM `cart_tbl`
         <where>
@@ -47,4 +52,17 @@
             </foreach>
         </where>
     </delete>
+
+    <insert id="insert_payment" parameterType="com.kyobo.koreait.domain.vos.PaymentVO">
+        INSERT INTO `payment_tbl`(`userEmail`, `paymentAmount`)
+        VALUES (#{userEmail}, #{paymentAmount})
+    </insert>
+
+    <insert id="insert_order" parameterType="list">
+        INSERT INTO `order_tbl` VALUES
+        <foreach collection="list" item="cartVO" separator=",">
+            (null, LAST_INSERT_ID(), #{cartVO.bookISBN}, #{cartVO.bookCount})
+        </foreach>
+    </insert>
+
 </mapper>

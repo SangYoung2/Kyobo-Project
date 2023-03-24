@@ -2,6 +2,7 @@ const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute("con
 const CartBookInfoContainer = document.getElementById('cart_book_info_container')
 const OrderContainer = document.getElementById('order_container')
 const AllChecked = document.querySelector('.all_checked')
+const OrderBtn = document.getElementById('order_btn')
 
 get_cart()
 
@@ -23,7 +24,7 @@ function create_cart_book(cartBooks){
                             <div class="cart_book_info_left">\n 
                                 <input type="checkbox" name="check">\n 
                                 <input type="hidden" name="bookISBN" value="${cartBook.bookISBN}">\n 
-                                <img class="book_img" src="" alt="책이미지">\n 
+                                <img class="book_img" src="/img/book/${cartBook.bookISBN}.jpg" alt="책이미지">\n 
                                 <div class="book_common_info">\n 
                                     <span class="title">${cartBook.title}</span><br/>\n 
                                     <span class="price">${cartBook.price}원</span>\n 
@@ -48,11 +49,11 @@ function create_cart_book(cartBooks){
         TotalPrice += cartBook.price * cartBook.bookCount;
     }
     OrderContainer.insertAdjacentHTML('beforeend', '' +
-        `            <div><span>상품금액</span><span>${TotalPrice}</span></div>\n` +
-        '            <div><span>배송비</span><span>price</span></div>\n' +
+        `            <div><span>상품금액: </span><span>${TotalPrice}원</span></div>\n` +
+        '            <div><span>배송비: </span><span>0원</span></div>\n' +
         '            <hr>\n' +
-        `            <div><b>결제 예정 금액</b><b>${TotalPrice}</b></div>\n` +
-        '            <input class="order_btn" type="button" value="주문하기">\n')
+        `            <div><b>결제 예정 금액: </b><b id="total_price">${TotalPrice}</b><b>원</b></div>\n` +
+        '            <input id="order_btn" type="button" value="주문하기" onclick="book_order()">\n')
 }
 
 function checkAll(){
@@ -80,8 +81,6 @@ function delete_heart_cart(btn){
     }else {
         const requestURL = btn === 'heart' ? '/user/heart' : '/user/cart'
         const requestMethod = btn === 'heart' ? 'POST' : 'DELETE'
-        console.log(requestURL)
-        console.log(requestMethod)
         fetch(requestURL, {
             method: requestMethod,
             headers: {
@@ -126,3 +125,38 @@ function modify_cart(btn , operator){
 
 }
 
+/***** 주문하기 *****/
+// 주문하기 버튼 눌렀을 시
+function book_order(){
+    const CheckBox = document.getElementsByName('check')
+    const TotalPrice = document.getElementById('total_price')
+    const body = {
+        paymentVO: {paymentAmount: TotalPrice.textContent},
+        cartVOS: []
+    };
+    CheckBox.forEach(x => {
+        if (x.checked){
+            const bookISBN = x.nextElementSibling;
+            const bookInfoObj = {bookISBN : bookISBN.value}
+            body.cartVOS.push(bookInfoObj);
+        }
+    })
+    if(body.cartVOS.length < 1){
+        alert('한개 이상을 선택 하셔야 합니다.')
+    }else {
+        fetch("/user/order", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                "X-CSRF-TOKEN": csrfToken
+            },
+            body: JSON.stringify(body)})
+            .then(value => value.text())
+            .then(value => {
+                    location.href = value
+                delete_heart_cart('delete')
+            })
+            .catch(reason => {
+                console.log(reason)});
+    }
+}

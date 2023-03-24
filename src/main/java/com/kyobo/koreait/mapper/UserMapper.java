@@ -3,10 +3,7 @@ package com.kyobo.koreait.mapper;
 import com.kyobo.koreait.domain.dtos.CartDTO;
 import com.kyobo.koreait.domain.dtos.HeartDTO;
 import com.kyobo.koreait.domain.dtos.UserDTO;
-import com.kyobo.koreait.domain.vos.BookVO;
-import com.kyobo.koreait.domain.vos.CartVO;
-import com.kyobo.koreait.domain.vos.HeartVO;
-import com.kyobo.koreait.domain.vos.UserVO;
+import com.kyobo.koreait.domain.vos.*;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -26,6 +23,8 @@ public interface UserMapper {
 
     boolean modify_cart_book_count(CartVO cartVO);
 
+    boolean modify_book_count_in_cart_by_count(List<CartVO> cartVOS);
+
     boolean delete_book_in_cart(List<CartVO> cartVOS);
 
     boolean insert_books_in_heart(List<HeartDTO> heartDTOS);
@@ -33,5 +32,11 @@ public interface UserMapper {
     List<BookVO> get_book_in_heart(String userEmail);
 
     boolean delete_book_in_heart(List<HeartVO> heartVOS);
+
+    // 결제 내역 추가하기
+    boolean insert_payment(PaymentVO paymentVO);
+
+    // 주문 내역 추가하기
+    boolean insert_order(List<CartVO> cartVOS);
 
 }
