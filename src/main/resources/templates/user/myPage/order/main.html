@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+	<h3>주문 내역 페이지입니다.</h3>
+
+	<table border="1px" style="text-align: center">
+		<thead>
+			<tr>
+				<td>주문 번호</td>
+				<td>결제 일시</td>
+				<td>총 가격</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="paymentVO : ${paymentVOS}" >
+				<td><a th:href="@{/user/myPage/order/detail/} + ${paymentVO.orderNo}">[[${paymentVO.orderNo}]]</a></td>
+				<td th:text="${#dates.format(paymentVO.orderTime, 'yyyy-MM-dd HH:mm:ss')}">[[${paymentVO.orderTime}]]</td>
+				<td>[[${paymentVO.paymentAmount}]]</td>
+			</tr>
+		</tbody>
+	</table>
+	<a th:href="@{/}">메인페이지로 돌아가기</a>
+</body>
+</html>

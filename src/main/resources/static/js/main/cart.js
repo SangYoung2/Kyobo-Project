@@ -11,7 +11,7 @@ function get_cart(){
         .then(response => response.json())
         .then(value => {
             create_cart_book(value)
-
+            create_order_container(value)
         })
         .catch(reason => console.log(reason))
 }
@@ -42,18 +42,39 @@ function create_cart_book(cartBooks){
                            </div>\n 
                         </div>\n`)
     }
+}
 
+function create_order_container(cartBooks){
     OrderContainer.innerHTML = '';
+    const CheckBox = document.getElementsByName('check');
+    const bookArray = {
+        price : [],
+        bookCount : []
+    }
     let TotalPrice = 0;
     for (const cartBook of cartBooks){
-        TotalPrice += cartBook.price * cartBook.bookCount;
+        bookArray.price.push(cartBook.price)
+        bookArray.bookCount.push(cartBook.price)
     }
+
     OrderContainer.insertAdjacentHTML('beforeend', '' +
         `            <div><span>상품금액: </span><span>${TotalPrice}원</span></div>\n` +
         '            <div><span>배송비: </span><span>0원</span></div>\n' +
         '            <hr>\n' +
         `            <div><b>결제 예정 금액: </b><b id="total_price">${TotalPrice}</b><b>원</b></div>\n` +
         '            <input id="order_btn" type="button" value="주문하기" onclick="book_order()">\n')
+
+    const totalPrice = document.getElementById('total_price');
+    CheckBox.forEach((x,index) => {
+        console.log(x)
+        x.onclick = () => {
+            TotalPrice += parseInt(bookArray.price[index]) * parseInt(bookArray.bookCount[index]);
+            totalPrice.innerText = '';
+            totalPrice.innerText = TotalPrice;
+            console.log(bookArray)
+        }
+    })
+
 }
 
 function checkAll(){
@@ -63,6 +84,15 @@ function checkAll(){
             x.checked = !!AllChecked.checked;
         })
     }
+}
+
+function cart_book_check(){
+    const CheckBox = document.getElementsByName('check')
+    CheckBox.forEach(x => {
+        x.onclick = () => {
+            create_order_container()
+        }
+    })
 }
 
 function delete_heart_cart(btn){
@@ -137,7 +167,8 @@ function book_order(){
     CheckBox.forEach(x => {
         if (x.checked){
             const bookISBN = x.nextElementSibling;
-            const bookInfoObj = {bookISBN : bookISBN.value}
+            const bookCount = x.parentElement.nextElementSibling.querySelector('.book_count_value');
+            const bookInfoObj = {bookISBN : bookISBN.value, bookCount : bookCount.value}
             body.cartVOS.push(bookInfoObj);
         }
     })

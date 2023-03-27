@@ -46,6 +46,8 @@ public class CustomSecurityConfig {
 
         http.csrf();
 
+        http.oauth2Login().loginPage("/user/login");
+
         return http.build();
     }
 

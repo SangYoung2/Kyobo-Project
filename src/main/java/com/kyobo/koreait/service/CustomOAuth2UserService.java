@@ -1,0 +1,75 @@
+package com.kyobo.koreait.service;
+
+import com.kyobo.koreait.domain.dtos.UserDTO;
+import com.kyobo.koreait.domain.vos.UserVO;
+import com.kyobo.koreait.mapper.UserMapper;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.oauth2.client.registration.ClientRegistration;
+import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
+import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
+import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.stereotype.Service;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Objects;
+
+@Log4j2
+@Service
+@RequiredArgsConstructor
+public class CustomOAuth2UserService  extends DefaultOAuth2UserService {
+    @Autowired
+    UserMapper userMapper;
+
+    @Override
+    public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
+        log.info(" ==== loadUser ==== ");
+        ClientRegistration clientRegistration = userRequest.getClientRegistration();
+        String clientName = clientRegistration.getClientName();
+
+        log.info("userRequest: " + userRequest);
+        log.info("clientName: " + clientName);
+
+        OAuth2User oAuth2User = super.loadUser(userRequest);
+        Map<String, Object> paramMap = oAuth2User.getAttributes();
+        
+        // 유저 이메일을 저장할 변수
+        String userEmail = "";
+        
+        switch (clientName) {
+            case "kakao" :
+                userEmail = get_kakao_userEmail(paramMap);
+                break;
+        }
+        
+        // 해당 소셜 로그인이 제공하는 키와 밸류값을 출력
+        paramMap.forEach((k, v) -> {
+            log.info("Attr key:" + k);
+            log.info("Attr value:" + v);
+        });
+
+        return oAuth2User;
+    }
+    
+    // 카카오로 접속한 유저의 이메일을 반환하는 메소드
+    private String get_kakao_userEmail(Map<String, Object> paramMap){
+        log.info("===== kakao user login.. getting userEmail =====");
+        LinkedHashMap kakaoAccount = (LinkedHashMap)paramMap.get("kakao_account");
+        String userEmail = (String)kakaoAccount.get("email");
+        log.info("가져온 userEmail: " + userEmail);
+        return userEmail;
+    }
+
+    // 해당 kakao로그인 email을 가지는 유저가 있는지 검사하고, 해당 유저가 있다면 해당 유저를 반환하는 메소드
+    private UserDTO get_user_by_email(String userEmail){
+        UserVO userVO = userMapper.get_user(userEmail);
+        if(userVO == null) {
+            // 해당 kakao Email을 email로 가지는 유저를 회원가입(등록) 시킨다.
+            userMapper.register_user(userVO);
+        }
+        return null;
+    }
+}

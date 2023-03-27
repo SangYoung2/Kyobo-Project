@@ -53,6 +53,11 @@
         </where>
     </delete>
 
+    <!--  결제 관련 DBMS  -->
+    <select id="get_payment" resultType="com.kyobo.koreait.domain.vos.PaymentVO">
+        SELECT * FROM `payment_tbl` WHERE `userEmail` = #{userEmail}
+    </select>
+
     <insert id="insert_payment" parameterType="com.kyobo.koreait.domain.vos.PaymentVO">
         INSERT INTO `payment_tbl`(`userEmail`, `paymentAmount`)
         VALUES (#{userEmail}, #{paymentAmount})
@@ -64,5 +69,13 @@
             (null, LAST_INSERT_ID(), #{cartVO.bookISBN}, #{cartVO.bookCount})
         </foreach>
     </insert>
+
+    <select id="get_order" resultType="com.kyobo.koreait.domain.dtos.CartDTO">
+        SELECT `ORDER`.bookISBN, `ORDER`.bookCount, `BOOK`.title, `BOOK`.price FROM `order_tbl` `ORDER`
+        INNER JOIN `book_tbl` `BOOK`
+        ON `BOOK`.`ISBN` = `ORDER`.`bookISBN`
+        WHERE orderNo = #{orderNo}
+        ORDER BY `no`
+    </select>
 
 </mapper>

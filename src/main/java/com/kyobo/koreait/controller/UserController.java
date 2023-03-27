@@ -3,10 +3,7 @@ package com.kyobo.koreait.controller;
 import com.kyobo.koreait.domain.dtos.CartDTO;
 import com.kyobo.koreait.domain.dtos.HeartDTO;
 import com.kyobo.koreait.domain.dtos.OrderDTO;
-import com.kyobo.koreait.domain.vos.BookVO;
-import com.kyobo.koreait.domain.vos.CartVO;
-import com.kyobo.koreait.domain.vos.HeartVO;
-import com.kyobo.koreait.domain.vos.UserVO;
+import com.kyobo.koreait.domain.vos.*;
 import com.kyobo.koreait.service.UserService;
 import lombok.extern.log4j.Log4j2;
 import org.apache.ibatis.annotations.Update;
@@ -15,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -177,8 +175,31 @@ public class UserController {
         //현재 로그인된 유저 정보와 javascript에서 받아온 DTO객체 정보를 넘겨줌
         boolean orderResult =  userService.insert_payment_order(userDetails.getUsername(), orderDTO);
         if(!orderResult){
-            return "redirect:/error/main";
+            return "/error/main";
         }
-        return "redirect:/main/order";
+        return "/main/order";
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/myPage/order/main")
+    public void myPage_order(
+            @AuthenticationPrincipal UserDetails userDetails,
+            Model model
+    ){
+        log.info("===== myPage_order =====");
+        List<PaymentVO> paymentVOS = userService.get_payment(userDetails.getUsername());
+        model.addAttribute("paymentVOS", paymentVOS);
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/myPage/order/detail/{orderNo}")
+    public String myPage_order_detail(
+            @PathVariable String orderNo,
+            Model model
+    ){
+        log.info("===== myPage_order =====");
+        List<CartDTO> cartDTOS = userService.get_order(orderNo);
+        model.addAttribute("cartDTOS", cartDTOS);
+        return "/user/myPage/order/detail";
     }
 }

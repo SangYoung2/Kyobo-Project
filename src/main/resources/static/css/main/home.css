@@ -16,6 +16,7 @@ a {
 
 /*===== Section 1 =====*/
 #book_nav {
+    min-width: 1300px;
     display: flex;
     justify-content: space-between;
     margin: 30px 0;
