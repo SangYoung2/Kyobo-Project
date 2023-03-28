@@ -6,6 +6,7 @@ import lombok.*;
 import javax.validation.constraints.NotBlank;
 
 @Data
+@AllArgsConstructor
 @RequiredArgsConstructor
 public class UserVO {
     @NotBlank

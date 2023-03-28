@@ -3,10 +3,12 @@ package com.kyobo.koreait.controller;
 import com.kyobo.koreait.domain.dtos.BookDTO;
 import com.kyobo.koreait.domain.dtos.CartDTO;
 import com.kyobo.koreait.domain.dtos.HeartDTO;
+import com.kyobo.koreait.domain.dtos.UploadFileDTO;
 import com.kyobo.koreait.domain.vos.BookVO;
 import com.kyobo.koreait.service.MainService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -71,5 +73,24 @@ public class MainController {
     @GetMapping("/main/order")
     public void current_order_page(){
         
+    }
+
+    // maptest
+    @PermitAll
+    @GetMapping("/main/maptest")
+    public void maptest(){
+
+    }
+
+    @Value("${com.kyobo.koreait.upload.path}")
+    private String uploadPath;
+    @ResponseBody
+    @PostMapping("/upload")
+    public void upload_file(UploadFileDTO uploadFileDTO){
+        if(uploadFileDTO.getFiles() != null){
+            uploadFileDTO.getFiles().forEach(multipartFile -> {
+                log.info(multipartFile);
+            });
+        }
     }
 }
