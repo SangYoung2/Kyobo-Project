@@ -6,7 +6,6 @@ import com.kyobo.koreait.domain.dtos.OrderDTO;
 import com.kyobo.koreait.domain.vos.*;
 import com.kyobo.koreait.service.UserService;
 import lombok.extern.log4j.Log4j2;
-import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -18,7 +17,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.awt.print.Book;
 import java.util.List;
 
 @Log4j2
@@ -57,7 +55,7 @@ public class UserController {
         log.info(" 받아온 userVO => " + userVO);
         if(bindingResult.hasErrors()){
             log.info(" bindingResult에서 에러가 발생하였음 ");
-            return "/error/main";
+            return "error/main";
         }
         // 인증받은 인증 번호와 중복체크한 유저이메일 (아이디)를 가져온다.
         Boolean phoneAuthenticated = (Boolean) session.getAttribute("phoneAuthenticated"); // 인증이 되었는지 체크
@@ -70,7 +68,7 @@ public class UserController {
                 || !userVO.getPhone().equals(authenticateNumber) // 인증받은 휴대폰과 가입할 휴대폰이 다르거나
                 ){
             log.info("에러!");
-            return "/error/main";
+            return "error/main";
         }
         log.info(" 유저 회원가입을 시도함 ... ");
         userService.register_user(userVO);
@@ -175,9 +173,9 @@ public class UserController {
         //현재 로그인된 유저 정보와 javascript에서 받아온 DTO객체 정보를 넘겨줌
         boolean orderResult =  userService.insert_payment_order(userDetails.getUsername(), orderDTO);
         if(!orderResult){
-            return "/error/main";
+            return "error/main";
         }
-        return "/main/order";
+        return "main/order";
     }
 
     @PreAuthorize("isAuthenticated()")
@@ -200,6 +198,6 @@ public class UserController {
         log.info("===== myPage_order =====");
         List<CartDTO> cartDTOS = userService.get_order(orderNo);
         model.addAttribute("cartDTOS", cartDTOS);
-        return "/user/myPage/order/detail";
+        return "user/myPage/order/detail";
     }
 }
