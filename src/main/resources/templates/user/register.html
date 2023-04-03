@@ -3,14 +3,17 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 >
-<link rel="stylesheet" href="/static/css/user/register.css" th:href="@{/css/user/register.css}">
-<script src="/js/user/register.js" th:src="@{/js/user/register.js}" defer></script>
+
 <head>
     <meta charset="UTF-8">
+    <meta th:name="${_csrf.parameterName}" th:content="${_csrf.token}">
     <title>회원가입</title>
+    <link rel="stylesheet" href="/static/css/user/register.css" th:href="@{/css/user/register.css}">
+    <script src="/js/user/register.js" th:src="@{/js/user/register.js}" defer></script>
 </head>
 <body>
     <form th:action="@{/user/register}" th:method="post">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:content="${_csrf.token}">
         <h1>교보문고 회원가입</h1>
         <div class="info_box">
             <p>아이디(이메일)</p>

@@ -15,7 +15,10 @@
 	<div><b>저자:</b>  [[${bookVO.author}]]</div>
 	<div><b>출판사:</b>  [[${bookVO.publisher}]]</div>
 	<div><b>소개:</b>  [[${bookVO.introduce}]]</div>
-	<div><b>내용:</b>  [[${bookVO.contents}]]</div>
+	<div><b>내용:</b></div>
+	<div th:each="content: ${bookVO.contents.split('\n')}">
+		<div th:text="${content}"></div>
+	</div>
 	<div><b>가격:</b>  [[${bookVO.price}]]</div>
 	<div><b>평가:</b>  [[${bookVO.rating}]]</div>
 </body>
