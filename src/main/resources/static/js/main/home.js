@@ -6,7 +6,7 @@ const SearchResultOrderSelect = document.getElementById('search_result_order_sel
 const SearchResultCountSelect =document.getElementById('search_result_count_select')
 const BookPageList = document.getElementById('book_page_list')
 
-get_all_books()
+get_all_books_by_condition("", "rating", 8, 1);
 
 // 책 찜하기/장바구니 넣기 공통 처리 부분
 // (버튼 눌렀을 시 => 데이터 생성, 가능여부 체크)
@@ -53,7 +53,10 @@ function insert(clickedBtn, bookISBNArray){
 function get_all_books(){
     fetch('main/books')
         .then(response => response.json())
-        .then(value => create_book_list(value))
+        .then(value => {
+            create_book_list(value)
+            create_list_of_paging(value)
+        })
         .catch(reason => {
             console.log(reason)
         })
@@ -78,7 +81,8 @@ function create_book_list(bookObject){
 // 전체 페이지 번호 리스트를 생성하는 메소드
 function create_list_of_paging(bookObject){
     BookPageList.innerHTML = '';
-    for (let i = bookObject.minPage; i < bookObject.maxPage ; i++) {
+    console.log(bookObject);
+    for (let i = bookObject.minPage; i <= bookObject.maxPage ; i++) {
         if(i === bookObject.nowPage) {
             BookPageList.insertAdjacentHTML('beforeend',
                 `<li onclick="book_page_li_clicked(this)"><b>${i}</b></li>`)
@@ -111,9 +115,9 @@ function get_all_books_by_condition(searchKeyword, order, pagePerArticle, nowPag
         .then(value => value.json())
         .then(value => {
             create_book_list(value);
-            create_list_of_paging(value)
+            create_list_of_paging(value);
         })
-        .catch(reason => {})
+        .catch(reason => {console.log(reason)})
 }
 
 searchInput.onkeydown = event => {
@@ -135,7 +139,7 @@ searchInput.onkeydown = event => {
 
 // 정렬 순서 셀렉 박스 클릭 시 동작
 SearchResultOrderSelect.onchange = () => {
-    const keyword = searchInput.value;              //키워드
+    const keyword = searchInput.value;    //키워드
     const order =  SearchResultOrderSelect.value    //정렬순서
     const pagePerArticle = SearchResultCountSelect.value;   //한페이지당 개수
     //검색어를 제대로 입력하고 엔터키 눌렀을 시 서버에 해당 데이터를 요청함
@@ -144,7 +148,7 @@ SearchResultOrderSelect.onchange = () => {
 
 // 표시 개수 셀렉 박스 클릭 시 동작
 SearchResultCountSelect.onchange = () => {
-    const keyword = searchInput.value;              //키워드
+    const keyword = searchInput.value;  //키워드
     const order =  SearchResultOrderSelect.value    //정렬순서
     const pagePerArticle = SearchResultCountSelect.value;   //한페이지당 개수
     if(pagePerArticle === "8") {
@@ -157,3 +161,4 @@ SearchResultCountSelect.onchange = () => {
     //검색어를 제대로 입력하고 엔터키 눌렀을 시 서버에 해당 데이터를 요청함
     get_all_books_by_condition(keyword, order, pagePerArticle, 1);
 }
+

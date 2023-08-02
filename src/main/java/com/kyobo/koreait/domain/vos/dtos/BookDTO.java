@@ -17,10 +17,11 @@ public class BookDTO {
     private int nowPage;
     private int minPage; //현재 페이지에서 보여줄 최소 페이지 번호
     private int maxPage; //현재 페이지에서 보여줄 최대 페이지 번호
-    private final int pageRange = 3; //현재 페이지에 보여줄 페이지 개수
+    private int pageRange; //현재 페이지에 보여줄 페이지 개수
 
     public BookDTO(List<BookVO> bookVOS, int pagePerArticle, int nowPage) {
         this.pagePerArticle = pagePerArticle;
+        this.pageRange = (bookVOS.size() % pagePerArticle > 0) ? (bookVOS.size() / pagePerArticle) + 1 : bookVOS.size() / pagePerArticle;
         this.nowPage = nowPage;
         int allArticleCount = bookVOS.size();
         this.startArticleCount = allArticleCount - ((nowPage - 1) * pagePerArticle);
