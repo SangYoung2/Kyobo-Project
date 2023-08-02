@@ -1,4 +1,4 @@
-package com.kyobo.koreait.domain.dtos;
+package com.kyobo.koreait.domain.vos.dtos;
 
 import lombok.Getter;
 import lombok.Setter;

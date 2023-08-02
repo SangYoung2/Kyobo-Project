@@ -1,8 +1,8 @@
 package com.kyobo.koreait.controller;
 
-import com.kyobo.koreait.domain.dtos.CartDTO;
-import com.kyobo.koreait.domain.dtos.HeartDTO;
-import com.kyobo.koreait.domain.dtos.OrderDTO;
+import com.kyobo.koreait.domain.vos.dtos.CartDTO;
+import com.kyobo.koreait.domain.vos.dtos.HeartDTO;
+import com.kyobo.koreait.domain.vos.dtos.OrderDTO;
 import com.kyobo.koreait.domain.vos.*;
 import com.kyobo.koreait.service.UserService;
 import lombok.extern.log4j.Log4j2;

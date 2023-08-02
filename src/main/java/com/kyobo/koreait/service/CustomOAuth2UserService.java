@@ -1,6 +1,6 @@
 package com.kyobo.koreait.service;
 
-import com.kyobo.koreait.domain.dtos.UserDTO;
+import com.kyobo.koreait.domain.vos.dtos.UserDTO;
 import com.kyobo.koreait.domain.enums.UserRole;
 import com.kyobo.koreait.domain.vos.UserVO;
 import com.kyobo.koreait.mapper.UserMapper;
@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;

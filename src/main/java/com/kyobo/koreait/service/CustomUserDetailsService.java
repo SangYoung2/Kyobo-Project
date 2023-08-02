@@ -1,6 +1,6 @@
 package com.kyobo.koreait.service;
 
-import com.kyobo.koreait.domain.dtos.UserDTO;
+import com.kyobo.koreait.domain.vos.dtos.UserDTO;
 import com.kyobo.koreait.domain.vos.UserVO;
 import com.kyobo.koreait.mapper.UserMapper;
 import lombok.extern.log4j.Log4j2;

@@ -1,6 +1,6 @@
 package com.kyobo.koreait.controller;
 
-import com.kyobo.koreait.domain.dtos.BookDTO;
+import com.kyobo.koreait.domain.vos.dtos.BookDTO;
 import com.kyobo.koreait.domain.vos.BookVO;
 import com.kyobo.koreait.service.MainService;
 import lombok.extern.log4j.Log4j2;

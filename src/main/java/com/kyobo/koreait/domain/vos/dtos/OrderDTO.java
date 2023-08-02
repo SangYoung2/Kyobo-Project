@@ -1,4 +1,4 @@
-package com.kyobo.koreait.domain.dtos;
+package com.kyobo.koreait.domain.vos.dtos;
 
 import com.kyobo.koreait.domain.vos.BookVO;
 import com.kyobo.koreait.domain.vos.CartVO;

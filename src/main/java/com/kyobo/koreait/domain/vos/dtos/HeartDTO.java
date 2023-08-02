@@ -1,4 +1,4 @@
-package com.kyobo.koreait.domain.dtos;
+package com.kyobo.koreait.domain.vos.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,10 +9,8 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class CartDTO {
-    private String bookISBN;
+public class HeartDTO {
     private int no;
-    private int bookCount;
-    private String title;
-    private int price;
+    private String userEmail;
+    private String bookISBN;
 }

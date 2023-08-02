@@ -1,6 +1,6 @@
 package com.kyobo.koreait.controller;
 
-import com.kyobo.koreait.domain.dtos.UploadBookDTO;
+import com.kyobo.koreait.domain.vos.dtos.UploadBookDTO;
 import com.kyobo.koreait.domain.vos.BookVO;
 import com.kyobo.koreait.util.S3Uploader;
 import lombok.extern.log4j.Log4j2;

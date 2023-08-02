@@ -1,6 +1,6 @@
 package com.kyobo.koreait.service;
 
-import com.kyobo.koreait.domain.dtos.BookDTO;
+import com.kyobo.koreait.domain.vos.dtos.BookDTO;
 import com.kyobo.koreait.domain.vos.BookVO;
 import com.kyobo.koreait.mapper.MainMapper;
 import org.springframework.beans.factory.annotation.Autowired;

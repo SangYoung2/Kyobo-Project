@@ -1,7 +1,5 @@
 package com.kyobo.koreait.mapper;
 
-import com.kyobo.koreait.domain.dtos.CartDTO;
-import com.kyobo.koreait.domain.dtos.HeartDTO;
 import com.kyobo.koreait.domain.vos.BookVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

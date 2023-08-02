@@ -7,20 +7,38 @@
 <head>
 	<meta charset="UTF-8">
 	<meta th:name="${_csrf.parameterName}" th:content="${_csrf.token}">
-	<title>Title</title>
+	<title>[[${bookVO.title}]]</title>
+	<link rel="stylesheet" href="/static/css/main/detail.css" th:href="@{/css/main/detail.css}">
+	<link rel="stylesheet" href="/static/css/main/header.css" th:href="@{/css/main/header.css}">
 	<script src="https://kit.fontawesome.com/d19fdaba43.js" crossorigin="anonymous"></script>
+	<script src="/static/js/main/detail.js" th:src="@{/js/main/detail.js}" defer></script>
 </head>
 <body>
-	<div><b>제목:</b> [[${bookVO.title}]]</div>
-	<div><b>저자:</b>  [[${bookVO.author}]]</div>
-	<div><b>출판사:</b>  [[${bookVO.publisher}]]</div>
-	<div><b>소개:</b>  [[${bookVO.introduce}]]</div>
-	<div><b>내용:</b></div>
-	<div th:each="content: ${bookVO.contents.split('\n')}">
-		<div th:text="${content}"></div>
-	</div>
-	<div><b>가격:</b>  [[${bookVO.price}]]</div>
-	<div><b>평가:</b>  [[${bookVO.rating}]]</div>
+	<th:block th:replace="~{main/header :: header}"></th:block>
+	<section id="book_detail_content">
+		<div class="book_detail_title"><h2>[[${bookVO.title}]]</h2></div>
+		<div class="book_detail_view_area">
+			<div>
+				<div class="book_detail_author"><b>저자:</b>  [[${bookVO.author}]]</div>
+				<div class="book)detail_publisher"><b>출판사:</b>  [[${bookVO.publisher}]]</div>
+			</div>
+			<div class="book_detail_img"><img th:src="@{/img/book/} + ${bookVO.ISBN} + .jpg"  alt="책이미지"></div>
+			<div class="book_detail_price"><b>가격:</b> [[${bookVO.price}]]</div>
+		</div>
+		<div class="book_detail_introduce">
+			<b>소개</b><br/>
+			[[${bookVO.introduce}]]
+		</div>
+		<div class="book_detail_contents">
+			<b>내용</b><br/>
+			<div class="book_detail_content" >
+				<div th:each="content: ${bookVO.contents.split('\n')}">
+					<div th:text="${content}"></div>
+				</div>
+			</div>
+			<span class="view_btn">더보기</span>
+		</div>
+	</section>
 </body>
 </html>
 
