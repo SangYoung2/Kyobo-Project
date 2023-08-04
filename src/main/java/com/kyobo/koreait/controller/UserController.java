@@ -61,13 +61,20 @@ public class UserController {
         // 인증받은 인증 번호와 중복체크한 유저이메일 (아이디)를 가져온다.
         Boolean phoneAuthenticated = (Boolean) session.getAttribute("phoneAuthenticated"); // 인증이 되었는지 체크
         String authenticateNumber = (String) session.getAttribute("phoneAuthenticatedNumber"); // 휴대폰 번호 일치 체크
+        authenticateNumber = authenticateNumber.substring(0,3) + "-" + authenticateNumber.substring(3,7) + "-" + authenticateNumber.substring(7,11);
         String userEmail = (String) session.getAttribute("emailAuthenticated"); // 이메일 일치 체크
+        log.info("인증 1 = " +  phoneAuthenticated == null);
+        log.info("인증 2 = " +  userEmail == null);
+        log.info("인증 3 = " +  !phoneAuthenticated);
+        log.info("인증 4 = " +  !userVO.getEmail().equals(userEmail));
+        log.info("인증 5 = " +  !userVO.getPhone().equals(authenticateNumber));
         if(phoneAuthenticated == null // 휴대폰 인증을 거치지 않고 왔거나
                 || userEmail == null  // 이메일 중복체크를 하지 않았거나
                 || !phoneAuthenticated // 인증이 false 이거나 (실패했거나)
                 || !userVO.getEmail().equals(userEmail) // 인증받은 이메일과 가입할 이메일이 다르거나
                 || !userVO.getPhone().equals(authenticateNumber) // 인증받은 휴대폰과 가입할 휴대폰이 다르거나
                 ){
+
             log.info("에러!");
             return "error/main";
         }

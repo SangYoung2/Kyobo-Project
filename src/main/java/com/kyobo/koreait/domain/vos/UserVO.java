@@ -19,6 +19,5 @@ public class UserVO {
     private String birth;
     @NotBlank
     private String phone;
-
     private UserRole role;
 }

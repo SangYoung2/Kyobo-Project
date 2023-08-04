@@ -35,6 +35,8 @@ public class RestAPIController {
             HttpSession session
     ){
         String authenticateNumber = (String) session.getAttribute("authenticateNumber");
+        log.info("authNumber = " + userInputAuthenticateNumber);
+        log.info("authenticateNumber = " + authenticateNumber);
         if(authenticateNumber == null){
             return false;
         }
