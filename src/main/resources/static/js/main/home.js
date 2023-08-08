@@ -69,7 +69,7 @@ function create_book_list(bookObject){
            '<div class="book">\n' +
            `<input class="product_isbn" type="hidden" value="${book.isbn}">`+
            `    <div class="check"><input class="check_btn" type="checkbox"></div>\n` +
-           `    <div class="product_img"><a href="/main/details/${book.isbn}"><img src="/img/book/${book.isbn}.jpg" alt="상품이미지"></a></div>\n` +
+           `    <div class="product_img"><a href="/main/details/${book.isbn}"><img src="https://kyobo-s3-bucket.s3.ap-northeast-2.amazonaws.com/img/book/${book.isbn}.jpg" alt="상품이미지"></a></div>\n` +
            `    <div class="product_title"><a href="/main/details/${book.isbn}">${book.title}</a></div>\n` +
            `    <div class="product_author"><span>${book.author} * ${book.publisher}</span></div>\n` +
            `    <div class="product_price"><span>${book.price}원</span></div>\n` +

@@ -6,20 +6,28 @@ import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Log4j2
 @Component
 @RequiredArgsConstructor
 public class S3Uploader {
+
     private final AmazonS3Client amazonS3Client;
+
     @Value("${cloud.aws.s3.bucket}")
     public String bucket;
+    public String get_file(String path){
+        return amazonS3Client.getUrl(bucket, path).toString();
+    }
 
     //S3로 파일 업로드하기 => 업로드 한 파일 URL 리스트를 반환한다.
     public List<String> upload(String bookISBN, String dirPath, List<String> filNames) throws Exception{

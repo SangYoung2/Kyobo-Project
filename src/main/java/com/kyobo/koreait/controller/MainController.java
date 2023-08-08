@@ -3,6 +3,7 @@ package com.kyobo.koreait.controller;
 import com.kyobo.koreait.domain.vos.dtos.BookDTO;
 import com.kyobo.koreait.domain.vos.BookVO;
 import com.kyobo.koreait.service.MainService;
+import com.kyobo.koreait.util.S3Uploader;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -17,6 +18,8 @@ import javax.annotation.security.PermitAll;
 public class MainController {
     @Autowired
     private MainService mainService;
+    @Autowired
+    private S3Uploader s3Uploader;
 
     @PermitAll
     @GetMapping("/")
@@ -39,6 +42,8 @@ public class MainController {
             @RequestParam(defaultValue = "8") int pagePerArticle,
             @RequestParam(defaultValue = "1") int nowPage
     ){
+        String imgPath = s3Uploader.get_file("img/book/1.jpg");
+        System.out.println("get S3img = " + imgPath);
         return mainService.get_all_books_by_condition(searchKeyword, order, pagePerArticle, nowPage);
     }
 
