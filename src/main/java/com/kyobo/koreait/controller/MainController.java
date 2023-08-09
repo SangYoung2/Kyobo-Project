@@ -18,8 +18,6 @@ import javax.annotation.security.PermitAll;
 public class MainController {
     @Autowired
     private MainService mainService;
-    @Autowired
-    private S3Uploader s3Uploader;
 
     @PermitAll
     @GetMapping("/")
