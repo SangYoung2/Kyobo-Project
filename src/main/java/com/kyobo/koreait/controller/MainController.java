@@ -42,8 +42,6 @@ public class MainController {
             @RequestParam(defaultValue = "8") int pagePerArticle,
             @RequestParam(defaultValue = "1") int nowPage
     ){
-        String imgPath = s3Uploader.get_file("img/book/1.jpg");
-        System.out.println("get S3img = " + imgPath);
         return mainService.get_all_books_by_condition(searchKeyword, order, pagePerArticle, nowPage);
     }
 

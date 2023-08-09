@@ -22,7 +22,7 @@
 				<div class="book_detail_author"><b>저자:</b>  [[${bookVO.author}]]</div>
 				<div class="book)detail_publisher"><b>출판사:</b>  [[${bookVO.publisher}]]</div>
 			</div>
-			<div class="book_detail_img"><img th:src="@{/img/book/} + ${bookVO.ISBN} + .jpg"  alt="책이미지"></div>
+			<div class="book_detail_img"><img th:src="@{https://kyobo-s3-bucket.s3.ap-northeast-2.amazonaws.com/img/book/} + ${bookVO.ISBN} + .jpg"  alt="책이미지"></div>
 			<div class="book_detail_price"><b>가격:</b> [[${bookVO.price}]]</div>
 		</div>
 		<div class="book_detail_introduce">

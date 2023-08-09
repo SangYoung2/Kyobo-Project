@@ -25,9 +25,6 @@ public class S3Uploader {
 
     @Value("${cloud.aws.s3.bucket}")
     public String bucket;
-    public String get_file(String path){
-        return amazonS3Client.getUrl(bucket, path).toString();
-    }
 
     //S3로 파일 업로드하기 => 업로드 한 파일 URL 리스트를 반환한다.
     public List<String> upload(String bookISBN, String dirPath, List<String> filNames) throws Exception{

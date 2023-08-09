@@ -24,7 +24,7 @@ function create_cart_book(cartBooks){
                             <div class="cart_book_info_left">\n 
                                 <input type="checkbox" name="check">\n 
                                 <input type="hidden" name="bookISBN" value="${cartBook.bookISBN}">\n 
-                                <img class="book_img" src="/img/book/${cartBook.bookISBN}.jpg" alt="책이미지">\n 
+                                <img class="book_img" src="https://kyobo-s3-bucket.s3.ap-northeast-2.amazonaws.com/img/book/${cartBook.bookISBN}.jpg" alt="책이미지">\n 
                                 <div class="book_common_info">\n 
                                     <span class="title">${cartBook.title}</span><br/>\n 
                                     <span class="price">${cartBook.price}원</span>\n 
