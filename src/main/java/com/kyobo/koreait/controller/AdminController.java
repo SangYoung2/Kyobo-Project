@@ -39,15 +39,15 @@ public class AdminController {
 
     @PermitAll
     @PostMapping("/upload")
-    public boolean upload_book_data(UploadBookDTO uploadBookDTO) throws Exception{
+    public void upload_book_data(UploadBookDTO uploadBookDTO) throws Exception{
         log.info("===== upload_book_data - 게시물 작성 =====");
         log.info("uploadBookDTO ==> " + uploadBookDTO);
         BookVO bookVO = uploadBookDTO.getBookVO();
-        log.info("getBookVO = " + uploadBookDTO.getBookVO());
+        log.info("getBookVO = " + bookVO);
+        adminService.insert_new_book(bookVO);
         List<String> fileNames = save_book_data(uploadBookDTO.getMainImageFile(), uploadBookDTO.getContentsImageFile(), bookVO.getISBN());
         List<String> uploadImageUrls = s3Uploader.upload(bookVO.getISBN(), uploadPath, fileNames);
         log.info(uploadImageUrls);
-        return adminService.insert_new_book(bookVO);
     }
 
     private List<String> save_book_data(MultipartFile mainImageFile, MultipartFile contentsImageFile , String dirName) {
