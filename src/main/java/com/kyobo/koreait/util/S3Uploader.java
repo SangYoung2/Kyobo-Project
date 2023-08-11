@@ -31,7 +31,7 @@ public class S3Uploader {
             try{
             File targetFile = new File(dirPath + "\\" + bookISBN, filName);
             // S3로 업로드
-            String uploadImageUrl = putS3(targetFile, bookISBN, targetFile.getName());
+            String uploadImageUrl = putS3(targetFile, targetFile.getName());
             // 원본 파일 삭제하기
             removeOriginalFile(targetFile);
             // 업로드 된 URL을 리턴한다.
@@ -44,11 +44,11 @@ public class S3Uploader {
     }
 
     //S3로 업로드
-    private String putS3(File uploadFile,String dirPath, String fileName) throws Exception{
+    private String putS3(File uploadFile, String fileName) throws Exception{
         log.info("===== S3 업로드 시도중.. =====");
         //지정된 bucket의 S3에 해당 파일이름으로 해당 파일을 업로드 한다
         amazonS3Client.putObject(
-                new PutObjectRequest(bucket, dirPath + "/" + fileName, uploadFile)
+                new PutObjectRequest(bucket, "img/book/" + fileName, uploadFile)
                         .withCannedAcl(CannedAccessControlList.PublicRead)
         );
         log.info("===== S3 업로드 성공! =====");

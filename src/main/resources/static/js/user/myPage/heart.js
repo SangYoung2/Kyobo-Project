@@ -19,7 +19,8 @@ function create_heart_books(BookList){
             `
             <div class="heart_books">
                 <input type="checkbox" name="heart_book_check">
-                <img src="/img/book/${book.isbn}.jpg"  alt="책 이미지">
+                <input type="text" value="${book.isbn}" hidden>
+                <img src="https://kyobo-s3-bucket.s3.ap-northeast-2.amazonaws.com/img/book/${book.isbn}.jpg"  alt="책 이미지">
                 <h4>${book.title}</h4>
                 <span>${book.author}</span>
             </div>
@@ -42,7 +43,7 @@ function delete_heart_books(){
     if(bookISBNArray.length < 1){
         alert('한개 이상을 선택 하셔야 합니다.')
     }else {
-        fetch("user/heart", {
+        fetch("/user/heart", {
             method: "DELETE",
             headers: {
                 'Content-Type': 'application/json',

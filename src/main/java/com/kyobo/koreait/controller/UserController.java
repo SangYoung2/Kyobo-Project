@@ -151,7 +151,7 @@ public class UserController {
             @AuthenticationPrincipal UserDetails userDetails
     ){
 
-        log.info("===== GET_BOOKS_IN_HEART");
+        log.info("===== GET_BOOKS_IN_HEART =====");
         return userService.get_book_in_heart(userDetails.getUsername());
     }
 
@@ -162,8 +162,8 @@ public class UserController {
             @RequestBody List<HeartVO> heartVOS
     ){
         log.info("===== DELETE CART =====");
-        log.info("cartVOS:" + heartVOS);
-        return userService.delete_book_in_heart(userDetails, heartVOS);
+        log.info("heartVOS:" + heartVOS);
+        return userService.delete_book_in_heart(userDetails.getUsername(), heartVOS);
     }
 
     /*====== 주문 관련 ======*/

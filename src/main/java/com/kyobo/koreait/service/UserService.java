@@ -75,8 +75,8 @@ public class UserService {
         return userMapper.get_book_in_heart(userEmail);
     }
 
-    public boolean delete_book_in_heart(UserDetails userDetails, List<HeartVO> heartVOS) {
-        heartVOS.parallelStream().forEach(heartVO -> heartVO.setUserEmail(userDetails.getUsername()));
+    public boolean delete_book_in_heart(String userEmail, List<HeartVO> heartVOS) {
+        heartVOS.parallelStream().forEach(vo -> vo.setUserEmail(userEmail));
         return userMapper.delete_book_in_heart(heartVOS);
     }
 

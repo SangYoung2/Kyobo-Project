@@ -21,16 +21,10 @@
 				<input id="all_checked" type="checkbox" th:onclick="checkAll()"> 전체 선택
 			</div>
 			<div>
-				<input type="button" value="삭제" th:onclick="delete_heart_books()">
+				<input type="button" value="삭제" onclick="delete_heart_books()" th:onclick="delete_heart_books()">
 			</div>
 		</div>
 		<div id="heart_book_container">
-			<div class="heart_books">
-				<input type="checkbox">
-				<img src="/static/img/book/1.jpg"  alt="책 이미지">
-				<h4>title</h4>
-				<span>저자</span>
-			</div>
 		</div>
 	</section>
 </body>

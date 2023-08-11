@@ -20,20 +20,6 @@
         `bookCount` = `bookCount` + 1
     </insert>
 
-    <insert id="insert_books_in_heart" parameterType="java.util.List">
-        INSERT IGNORE INTO `heart_tbl` VALUES
-        <foreach item="heartDTOS" collection="list" separator=",">
-            (null, #{heartDTOS.userEmail}, #{heartDTOS.bookISBN})
-        </foreach>
-    </insert>
-
-    <select id="get_book_in_heart" resultType="com.kyobo.koreait.domain.vos.BookVO">
-        SELECT BOOK.* FROM kyobo_db.heart_tbl HEART
-        INNER JOIN `book_tbl` BOOK
-        ON BOOK.ISBN = HEART.bookISBN
-        WHERE HEART.userEmail = #{userEmail}
-    </select>
-
     <update id="modify_cart_book_count" parameterType="com.kyobo.koreait.domain.vos.CartVO">
         UPDATE `cart_tbl` SET `bookCount` = #{bookCount}
         WHERE `userEmail` = #{userEmail} AND `bookISBN` = #{bookISBN}
@@ -49,6 +35,29 @@
         <where>
             <foreach collection="list" item="cartVO" separator="OR">
                 (`userEmail` = #{cartVO.userEmail} AND bookISBN = #{cartVO.bookISBN})
+            </foreach>
+        </where>
+    </delete>
+
+    <insert id="insert_books_in_heart" parameterType="java.util.List">
+        INSERT IGNORE INTO `heart_tbl` VALUES
+        <foreach item="heartDTOS" collection="list" separator=",">
+            (null, #{heartDTOS.userEmail}, #{heartDTOS.bookISBN})
+        </foreach>
+    </insert>
+
+    <select id="get_book_in_heart" resultType="com.kyobo.koreait.domain.vos.BookVO">
+        SELECT BOOK.* FROM kyobo_db.heart_tbl HEART
+        INNER JOIN `book_tbl` BOOK
+        ON BOOK.ISBN = HEART.bookISBN
+        WHERE HEART.userEmail = #{userEmail}
+    </select>
+
+    <delete id="delete_book_in_heart" parameterType="java.util.List">
+        DELETE FROM `heart_tbl`
+        <where>
+            <foreach collection="list" item="heartVO" separator="OR">
+                (`userEmail` = #{heartVO.userEmail} AND bookISBN = #{heartVO.bookISBN})
             </foreach>
         </where>
     </delete>
