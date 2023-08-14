@@ -2,6 +2,7 @@ package com.kyobo.koreait.mapper;
 
 import com.kyobo.koreait.domain.vos.BookVO;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -15,4 +16,7 @@ public interface AdminMapper {
 
     @Insert("INSERT INTO `book_tbl` VALUES (#{ISBN}, #{title}, #{contents}, #{author}, #{publisher}, #{introduce}, #{price}, default, default)")
     void insert_new_book(BookVO bookVO);
+
+    @Delete("DELETE FROM `book_tbl` WHERE ISBN = #{ISBN}")
+    boolean delete_book_data(String bookISBN);
 }

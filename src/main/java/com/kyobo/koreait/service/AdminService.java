@@ -17,4 +17,9 @@ public class AdminService {
     public void insert_new_book(BookVO bookVO){adminMapper.insert_new_book(bookVO);}
 
 
+    public boolean delete_book_data(String bookISBN) {
+        return adminMapper.delete_book_data(bookISBN);
+    }
+
+
 }

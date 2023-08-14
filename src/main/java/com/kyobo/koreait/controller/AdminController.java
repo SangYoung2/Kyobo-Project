@@ -3,15 +3,14 @@ package com.kyobo.koreait.controller;
 import com.kyobo.koreait.domain.vos.dtos.UploadBookDTO;
 import com.kyobo.koreait.domain.vos.BookVO;
 import com.kyobo.koreait.service.AdminService;
+import com.kyobo.koreait.service.MainService;
 import com.kyobo.koreait.util.S3Uploader;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.security.PermitAll;
@@ -29,6 +28,8 @@ public class AdminController {
     private S3Uploader s3Uploader;
     @Autowired
     private AdminService adminService;
+    @Autowired
+    private MainService mainService;
 
     @Value("${com.kyobo.koreait.upload.path}")
     private String uploadPath;
@@ -85,5 +86,17 @@ public class AdminController {
     @GetMapping("/books")
     public List<BookVO> get_all_books(){
         return adminService.get_all_books();
+    }
+
+    @ResponseBody
+    @DeleteMapping("/manage")
+    public boolean delete_books_data(String bookISBN){
+        return adminService.delete_book_data(bookISBN);
+    }
+
+    @GetMapping("/bookmodify")
+    public void get_book_modify(String bookISBN, Model model){
+        log.info("===== bookModify Page =====");
+        model.addAttribute("bookVO", mainService.get_book_by_isbn(bookISBN));
     }
 }
