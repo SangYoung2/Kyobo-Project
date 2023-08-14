@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta th:name="${_csrf.parameterName}" th:content="${_csrf.token}">
+    <title>파일 관리</title>
+	<script src="/static/js/admin/manage.js" th:src="@{/js/admin/manage.js}" defer></script>
+    <script src="https://kit.fontawesome.com/8b1463211e.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<table border="1px">
+		<thead>
+			<tr>
+				<td>ISBN</td>
+				<td>제목</td>
+				<td>관리</td>
+			</tr>
+		</thead>
+		<tbody id="book_info_container">
+			<tr>
+				<td>ISBN</td>
+				<td>제목</td>
+				<td>관리</td>
+			</tr>
+		</tbody>
+	</table>
+	<a href="/" th:href="@{/}"></a>
+</body>
+</html>

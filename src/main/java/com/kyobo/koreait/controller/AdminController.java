@@ -11,9 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.security.PermitAll;
+import java.awt.print.Book;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
@@ -72,5 +74,16 @@ public class AdminController {
             throw new RuntimeException(e);
         }
         return Arrays.asList("main." + mainImageFileContents, "contents." + contentsImageFileContents);
+    }
+
+    @GetMapping("/manage")
+    public void get_manage(){
+        log.info("===== ManagePage =====");
+    }
+
+    @ResponseBody
+    @GetMapping("/books")
+    public List<BookVO> get_all_books(){
+        return adminService.get_all_books();
     }
 }

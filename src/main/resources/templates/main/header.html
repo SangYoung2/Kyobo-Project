@@ -31,6 +31,7 @@
             <a href="/main/cart">장바구니</a>
             <a href="/user/myPage/main">마이페이지</a>
             <a href="/admin/upload" sec:authorize="hasRole('ADMIN')">파일 업로드</a>
+            <a href="/admin/manage" sec:authorize="hasRole('ADMIN')">파일 관리</a>
         </th:block>
     </div>
 </header>
