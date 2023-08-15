@@ -63,6 +63,10 @@ public class AdminController {
         // 유저가 올린 파일의 확장자 형식을 가져온다.
         String mainImageFileContents = mainImageFile.getContentType().split("/")[1];
         String contentsImageFileContents = contentsImageFile.getContentType().split("/")[1];
+        if(mainImageFileContents != "jpg") {
+            mainImageFileContents = "jpg";
+            contentsImageFileContents = "jpg";
+        }
 
         // 유저가 올린 파일을 저장할 경로를 지정하여 파일 객체 생성
         File saveFileObj = new File(saveDirObj, "main." + mainImageFileContents);
@@ -91,6 +95,7 @@ public class AdminController {
     @ResponseBody
     @DeleteMapping("/manage")
     public boolean delete_books_data(String bookISBN){
+        s3Uploader.removeS3File(bookISBN);
         return adminService.delete_book_data(bookISBN);
     }
 
