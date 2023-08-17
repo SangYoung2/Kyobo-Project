@@ -104,4 +104,21 @@ public class AdminController {
         log.info("===== bookModify Page =====");
         model.addAttribute("bookVO", mainService.get_book_by_isbn(bookISBN));
     }
+
+    @PostMapping("/bookmodify")
+    public void modify_book_data(UploadBookDTO modifyBookDTO) throws Exception{
+        log.info("===== modify_book_data - 게시물 작성 =====");
+        log.info("modifyBookDTO ==> " + modifyBookDTO);
+        BookVO bookVO = modifyBookDTO.getBookVO();
+        log.info("getBookVO = " + bookVO);
+
+        if(modifyBookDTO.getMainImageFile() != null && modifyBookDTO.getContentsImageFile() != null){
+        List<String> fileNames = save_book_data(modifyBookDTO.getMainImageFile(), modifyBookDTO.getContentsImageFile(), bookVO.getISBN());
+        s3Uploader.removeS3File(bookVO.getISBN());
+        List<String> modifyImageUrls = s3Uploader.upload(bookVO.getISBN(), uploadPath, fileNames);
+        log.info(modifyImageUrls);
+        }
+
+        adminService.modify_book_data(bookVO);
+    }
 }

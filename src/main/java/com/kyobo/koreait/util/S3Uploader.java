@@ -78,9 +78,11 @@ public class S3Uploader {
     public void removeS3File(String fileName){
         log.info("=====" + fileName + "=====");
         // S3 버킷명과 파일명을 전달하여 삭제요청을 생성
-        DeleteObjectRequest deleteObjectRequest = new DeleteObjectRequest(bucket, fileName);
+        DeleteObjectRequest deleteObjectRequest = new DeleteObjectRequest(bucket, "img/book/" + fileName + "/" +  "main.jpg"); // home 화면에 보이는 이미지 삭제
+        DeleteObjectRequest deleteObjectRequest2 = new DeleteObjectRequest(bucket, "img/book/" + fileName + "/" +  "contents.jpg"); // detail 화면에서 보이는 이미지 삭제
         // 삭제 요청 전송
         amazonS3Client.deleteObject(deleteObjectRequest);
+        amazonS3Client.deleteObject(deleteObjectRequest2);
         log.info(" ===== [ " + fileName + " ] 삭제 성공! ===== ");
     }
 }
