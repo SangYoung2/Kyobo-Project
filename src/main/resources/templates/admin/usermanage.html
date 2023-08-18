@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta th:name="${_csrf.parameterName}" th:content="${_csrf.token}">
+    <title>회원관리</title>
+    <script src="https://kit.fontawesome.com/8b1463211e.js" crossorigin="anonymous"></script>
+    <script src="/static/js/admin/usermanage.js" th:src="@{/js/admin/usermanage.js}" defer></script>
+</head>
+<body>
+    <table border="1px solid black">
+        <thead>
+            <tr>
+                <td>이메일</td>
+                <td>이름</td>
+                <td>생년월일</td>
+                <td>전화번호</td>
+                <td>구분</td>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</body>
+</html>

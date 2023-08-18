@@ -2,6 +2,7 @@ package com.kyobo.koreait.mapper;
 
 import com.kyobo.koreait.domain.vos.BookVO;
 
+import com.kyobo.koreait.domain.vos.UserVO;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -19,4 +20,7 @@ public interface AdminMapper {
 
     @Update("UPDATE `book_tbl` SET `title` =  #{title}, `contents` = #{contents}, `author` = #{author}, `publisher` = #{publisher}, `introduce` = #{introduce}, `price` = #{price} WHERE `ISBN` = #{ISBN}")
     void modify_book_data(BookVO bookVO);
+
+    @Select("SELECT * FROM `user_tbl`")
+    List<UserVO> get_all_users();
 }

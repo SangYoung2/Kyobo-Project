@@ -1,6 +1,7 @@
 package com.kyobo.koreait.service;
 
 import com.kyobo.koreait.domain.vos.BookVO;
+import com.kyobo.koreait.domain.vos.UserVO;
 import com.kyobo.koreait.mapper.AdminMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,5 +24,5 @@ public class AdminService {
     public void modify_book_data(BookVO bookVO){adminMapper.modify_book_data(bookVO);}
 
 
-
+    public List<UserVO> get_all_users(){return adminMapper.get_all_users();}
 }

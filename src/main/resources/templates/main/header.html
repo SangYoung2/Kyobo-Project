@@ -32,6 +32,7 @@
             <a href="/user/myPage/main">마이페이지</a>
             <a href="/admin/upload" sec:authorize="hasRole('ADMIN')">파일 업로드</a>
             <a href="/admin/manage" sec:authorize="hasRole('ADMIN')">파일 관리</a>
+            <a href="/admin/usermanage" sec:authorize="hasRole('ADMIN')">회원 관리</a>
         </th:block>
     </div>
 </header>

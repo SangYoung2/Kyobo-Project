@@ -1,5 +1,6 @@
 package com.kyobo.koreait.controller;
 
+import com.kyobo.koreait.domain.vos.UserVO;
 import com.kyobo.koreait.domain.vos.dtos.UploadBookDTO;
 import com.kyobo.koreait.domain.vos.BookVO;
 import com.kyobo.koreait.service.AdminService;
@@ -95,7 +96,9 @@ public class AdminController {
     @ResponseBody
     @DeleteMapping("/manage")
     public boolean delete_books_data(String bookISBN){
+        // AWS S3 에서 해당 제품의 이미지를 삭제시킴
         s3Uploader.removeS3File(bookISBN);
+        // DB에서 해당 제품의 정보를 삭제
         return adminService.delete_book_data(bookISBN);
     }
 
@@ -106,19 +109,37 @@ public class AdminController {
     }
 
     @PostMapping("/bookmodify")
-    public void modify_book_data(UploadBookDTO modifyBookDTO) throws Exception{
+    public String modify_book_data(UploadBookDTO modifyBookDTO) throws Exception{
         log.info("===== modify_book_data - 게시물 작성 =====");
         log.info("modifyBookDTO ==> " + modifyBookDTO);
         BookVO bookVO = modifyBookDTO.getBookVO();
         log.info("getBookVO = " + bookVO);
 
-        if(modifyBookDTO.getMainImageFile() != null && modifyBookDTO.getContentsImageFile() != null){
-        List<String> fileNames = save_book_data(modifyBookDTO.getMainImageFile(), modifyBookDTO.getContentsImageFile(), bookVO.getISBN());
-        s3Uploader.removeS3File(bookVO.getISBN());
-        List<String> modifyImageUrls = s3Uploader.upload(bookVO.getISBN(), uploadPath, fileNames);
-        log.info(modifyImageUrls);
+        MultipartFile MainImageFile = modifyBookDTO.getMainImageFile();
+        MultipartFile ContentsImageFile = modifyBookDTO.getMainImageFile();
+
+        // 이미지 파일을 보내지 않으면 S3에 업데이트 하지 않고 책 정보만 DB에 업데이트 한다.
+        if(!MainImageFile.isEmpty() && !ContentsImageFile.isEmpty()){
+            List<String> fileNames = save_book_data(modifyBookDTO.getMainImageFile(), modifyBookDTO.getContentsImageFile(), bookVO.getISBN());
+            s3Uploader.removeS3File(bookVO.getISBN());
+            List<String> modifyImageUrls = s3Uploader.upload(bookVO.getISBN(), uploadPath, fileNames);
+            log.info(modifyImageUrls);
         }
 
         adminService.modify_book_data(bookVO);
+
+        return "redirect:/admin/manage";
+    }
+
+    @GetMapping("/usermanage")
+    public void get_usermanage() {
+        log.info("===== userManage Page =====");
+    }
+
+    @ResponseBody
+    @GetMapping("/user")
+    public List<UserVO> get_all_users(){
+        log.info("===== get_all_users =====");
+        return adminService.get_all_users();
     }
 }
