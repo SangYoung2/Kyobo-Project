@@ -142,4 +142,12 @@ public class AdminController {
         log.info("===== get_all_users =====");
         return adminService.get_all_users();
     }
+
+    @ResponseBody
+    @DeleteMapping("/user")
+    public boolean delete_user_data(String userEmail){
+        log.info("===== delete_user_data =====");
+        log.info(userEmail);
+        return adminService.delete_user_data(userEmail);
+    }
 }

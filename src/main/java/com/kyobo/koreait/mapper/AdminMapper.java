@@ -23,4 +23,7 @@ public interface AdminMapper {
 
     @Select("SELECT * FROM `user_tbl`")
     List<UserVO> get_all_users();
+
+    @Delete("DELETE FROM `user_tbl` WHERE email = #{email}")
+    boolean delete_user_data(String userEmail);
 }

@@ -23,6 +23,7 @@ public class AdminService {
 
     public void modify_book_data(BookVO bookVO){adminMapper.modify_book_data(bookVO);}
 
-
     public List<UserVO> get_all_users(){return adminMapper.get_all_users();}
+
+    public boolean delete_user_data(String userEmail){return adminMapper.delete_user_data(userEmail);}
 }
