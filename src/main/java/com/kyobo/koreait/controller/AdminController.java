@@ -35,6 +35,11 @@ public class AdminController {
     @Value("${com.kyobo.koreait.upload.path}")
     private String uploadPath;
 
+    @GetMapping("/main")
+    public void admin_main(){
+        log.info("===== admin_main 화면 =====");
+    }
+
     @PermitAll
     @GetMapping("/upload")
     public void upload_book(){

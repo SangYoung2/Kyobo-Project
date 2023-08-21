@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta th:name="${_csrf.parameterName}" th:content="${_csrf.token}">
+    <title>관리페이지</title>
+    <script src="https://kit.fontawesome.com/8b1463211e.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<h1>관리페이지</h1>
+	<a href="/admin/upload" sec:authorize="hasRole('ADMIN')">파일 업로드</a> <br/>
+	<a href="/admin/manage" sec:authorize="hasRole('ADMIN')">파일 관리</a> <br/>
+	<a href="/admin/usermanage" sec:authorize="hasRole('ADMIN')">회원 관리</a> <br/>
+	<a href="/">메인페이지로 돌아가기</a>
+</body>
+</html>
