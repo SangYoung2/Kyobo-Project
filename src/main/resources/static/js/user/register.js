@@ -4,6 +4,11 @@ const ResisterForm = document.forms.item(0)
 const UserEmail = document.querySelector("input[name='email']");
 /* Password */
 const Password = document.querySelector("input[name='password']")
+const PasswordConfirm = document.querySelector("input[name='password_confirm']")
+let passwordValue = Password.value
+let passwordConfirmValue = PasswordConfirm.value
+/* Name */
+const UserName = document.querySelector("input[name = 'name']")
 /* Brith */
 const Birth = document.querySelector("input[name='birth']")
 const Year = document.getElementById("year");
@@ -80,16 +85,50 @@ function email_authenticated(){
         .catch(reason => {console.log(reason)})
 }
 
+Password.onchange = () => {
+    passwordValue = Password.value;
+    console.log(passwordValue)
+}
+
+PasswordConfirm.onchange = () => {
+    passwordConfirmValue = PasswordConfirm.value;
+    console.log(passwordConfirmValue)
+    if(passwordValue === passwordConfirmValue) {
+        console.log("true")
+        PasswordCheck = true;
+    }
+    else {
+        console.log("false")
+        PasswordCheck = false;
+    }
+}
+
 // 회원가입 버튼 눌렀을 때 (do register)
 RegisterBtn.onclick = () => {
-    Birth.value = Year.value + "-" +  Month.value + "-" + Day.value;
-    const userPhoneValue = Phone.value;
-    const userPhoneLength = Phone.value.length;
-    PhoneValue.value =
-        userPhoneLength === 11 ?
-            userPhoneValue.substring(0, 3) + '-' + userPhoneValue.substring(3, 7) + '-' + userPhoneValue.substring(7, 11) :
-            userPhoneValue.substring(0, 3) + '-' + userPhoneValue.substring(3, 6) + '-' + userPhoneValue.substring(6, 10);
-    ResisterForm.submit();
+    if(UserEmail.value !== "" && Password.value !== "" && PasswordConfirm.value !== "" && UserName.value !== ""){
+        if(EmailCheck && PasswordCheck && PhoneCheck){
+            Birth.value = Year.value + "-" +  Month.value + "-" + Day.value;
+            const userPhoneValue = Phone.value;
+            const userPhoneLength = Phone.value.length;
+            PhoneValue.value =
+                userPhoneLength === 11 ?
+                    userPhoneValue.substring(0, 3) + '-' + userPhoneValue.substring(3, 7) + '-' + userPhoneValue.substring(7, 11) :
+                    userPhoneValue.substring(0, 3) + '-' + userPhoneValue.substring(3, 6) + '-' + userPhoneValue.substring(6, 10);
+            ResisterForm.submit();
+        }
+        else if(!EmailCheck){
+            alert("이메일 확인을 해주세요!")
+        }
+        else if(!PasswordCheck){
+            alert("패스워드 확인을 해주세요!")
+        }
+        else {
+            alert("핸드폰 인증번호 확인을 해주세요!")
+        }
+    }
+    else {
+        alert("빈칸없이 모든 정보를 입력해주세요")
+    }
 }
 
 // 돌아가기 버튼 눌렀을 때 (do back)
