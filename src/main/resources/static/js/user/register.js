@@ -87,7 +87,6 @@ function email_authenticated(){
 
 Password.onchange = () => {
     passwordValue = Password.value;
-    console.log(passwordValue)
 }
 
 PasswordConfirm.onchange = () => {
