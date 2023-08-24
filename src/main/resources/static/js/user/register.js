@@ -104,15 +104,16 @@ PasswordConfirm.onchange = () => {
 
 // 회원가입 버튼 눌렀을 때 (do register)
 RegisterBtn.onclick = () => {
-    if(UserEmail.value !== "" && Password.value !== "" && PasswordConfirm.value !== "" && UserName.value !== ""){
+    Birth.value = Year.value + "-" +  Month.value + "-" + Day.value;
+    const userPhoneValue = Phone.value;
+    const userPhoneLength = Phone.value.length;
+    PhoneValue.value =
+        userPhoneLength === 11 ?
+            userPhoneValue.substring(0, 3) + '-' + userPhoneValue.substring(3, 7) + '-' + userPhoneValue.substring(7, 11) :
+            userPhoneValue.substring(0, 3) + '-' + userPhoneValue.substring(3, 6) + '-' + userPhoneValue.substring(6, 10);
+    if(UserEmail.value !== "" && Password.value !== "" && PasswordConfirm.value !== ""
+        && UserName.value !== "" && Birth.value !== "" && PhoneValue.value !== ""){
         if(EmailCheck && PasswordCheck && PhoneCheck){
-            Birth.value = Year.value + "-" +  Month.value + "-" + Day.value;
-            const userPhoneValue = Phone.value;
-            const userPhoneLength = Phone.value.length;
-            PhoneValue.value =
-                userPhoneLength === 11 ?
-                    userPhoneValue.substring(0, 3) + '-' + userPhoneValue.substring(3, 7) + '-' + userPhoneValue.substring(7, 11) :
-                    userPhoneValue.substring(0, 3) + '-' + userPhoneValue.substring(3, 6) + '-' + userPhoneValue.substring(6, 10);
             ResisterForm.submit();
         }
         else if(!EmailCheck){
