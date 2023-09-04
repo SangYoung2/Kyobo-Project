@@ -16,58 +16,42 @@
     <th:block th:replace="~{main/header :: header}"></th:block>
     <hr>
     <main>
-        <div id="order_process_container">
-            <h2>장바구니</h2>
-            <ul>
-                <li><span class="order_process_number on">1</span><span>장바구니</span></li>
-                <li><span class="order_process_number">2</span><span>주문/결제</span></li>
-                <li><span class="order_process_number">3</span><span>주문완료</span></li>
-            </ul>
-        </div>
-
-        <div id="cart_control_bar">
-            <div>
-                <input class="all_checked" type="checkbox" onclick="checkAll()">
-                <span>전체</span>
+        <section class="cart_wrap">
+            <div id="order_process_container">
+                <h2>장바구니</h2>
+                <ul>
+                    <li><span class="order_process_number on">1</span><span>장바구니</span></li>
+                    <li><span class="order_process_number">2</span><span>주문/결제</span></li>
+                    <li><span class="order_process_number">3</span><span>주문완료</span></li>
+                </ul>
             </div>
-            <div>
-                <input type="button" value="찜" onclick="delete_heart_cart('heart')">
-                <input type="button" value="삭제" onclick="delete_heart_cart('delete')">
-            </div>
-        </div>
 
-        <section id="cart_main_container">
-            <div id="cart_book_info_container">
-                <div class="cart_book_info">
-                    <div class="cart_book_info_left">
-                        <input type="checkbox">
-                        <img src="" alt="책이미지">
-                        <div class="book_common_info">
-                            <h3>title</h3>
-                            <span>price원</span>
-                        </div>
-                    </div>
-                    <div class="cart_book_info_right">
-                        <div class="book_price_container">
-                            <b>price</b>
-                            <div class="book_count">
-                                <i class="fa-solid fa-plus plus"></i>
-                                <input class="book_count_value" type="number" value="1">
-                                <i class="fa-solid fa-minus minus"></i>
-                            </div>
-                        </div>
-                    </div>
+            <div id="cart_control_bar">
+                <div>
+                    <input class="all_checked" type="checkbox" hidden>
+                    <i class="fa-regular fa-circle-check all_check_img"></i>
+                    <span>전체</span>
                 </div>
-                <hr>
+                <div>
+                    <input type="button" value="찜" onclick="delete_heart_cart('heart')">
+                    <input type="button" value="삭제" onclick="delete_heart_cart('delete')">
+                </div>
             </div>
-            <div id="order_container">
-                <div><span>상품금액</span><span>price</span></div>
-                <div><span>배송비</span><span>price</span></div>
-                <hr>
-                <div><b>결제 예정 금액</b><b>price</b></div>
-                <input id="order_btn" type="button" value="주문하기">
-            </div>
+
+            <article id="cart_main_container">
+                <div id="cart_book_info_container">
+
+                </div>
+                <div id="order_container">
+                    <div><span>상품금액</span><span>price</span></div>
+                    <div><span>배송비</span><span>price</span></div>
+                    <hr>
+                    <div><b>결제 예정 금액</b><b>price</b></div>
+                    <input id="order_btn" type="button" value="주문하기">
+                </div>
+            </article>
         </section>
+
     </main>
 </body>
 </html>

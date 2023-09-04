@@ -9,6 +9,7 @@
 	<title>찜 목록</title>
 	<link rel="stylesheet" href="/static/css/main/header.css" th:href="@{/css/main/header.css}">
 	<link rel="stylesheet" href="/static/css/user/myPage/heart.css" th:href="@{/css/user/myPage/heart.css}">
+	<script src="https://kit.fontawesome.com/8b1463211e.js" crossorigin="anonymous"></script>
 	<script src="/static/js/user/myPage/heart.js" th:src="@{/js/user/myPage/heart.js}" defer></script>
 </head>
 <body>
@@ -18,10 +19,13 @@
 		<h2>찜 목록</h2>
 		<div id="heart_page_control_bar">
 			<div>
-				<input id="all_checked" type="checkbox" th:onclick="checkAll()"> 전체 선택
+				<input id="all_checked" type="checkbox" hidden>
+				<i class="fa-regular fa-circle-check all_check_img"></i>
+				전체
 			</div>
 			<div>
-				<input type="button" value="삭제" onclick="delete_heart_books()" th:onclick="delete_heart_books()">
+				<input type="button" value="장바구니 담기" onclick="btn_checked(this)" th:onclick="btn_checked(this)">
+				<input type="button" value="삭제" onclick="btn_checked(this)" th:onclick="btn_checked(this)">
 			</div>
 		</div>
 		<div id="heart_book_container">

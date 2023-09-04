@@ -6,7 +6,7 @@
 
 /*===== CommonOption =====*/
 .padding_lr_300 {
-    padding: 0 300px;
+    padding: 0 18.75rem;
 }
 
 a {
@@ -19,8 +19,15 @@ li {
 }
 
 /*===== Section 1 =====*/
+.book_wrap {
+    width: 100%;
+    max-width: 1300px;
+    min-width: 1200px;
+    margin: 0 auto;
+}
+
 #book_nav {
-    min-width: 1300px;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     margin: 30px 0;
@@ -37,7 +44,6 @@ li {
 /*===== Section 2 =====*/
 #book_container {
     display: grid;
-    /*grid-template-rows: 1fr 1fr 1fr 1fr;*/
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 50px;
     margin-top: 30px;
@@ -46,12 +52,22 @@ li {
 .book {
     display: flex;
     flex-direction: column;
-    width: 300px;
-    height: 400px;
+    width: 250px;
 }
 
 .book img {
-    width: 200px;
+    margin: 10px 0;
+    width: 250px;
+    border: 1px solid rgba(100, 100, 100, 0.15);
+}
+
+.check > i {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.product_img {
+    margin: 0 auto;
 }
 
 #book_page_list {

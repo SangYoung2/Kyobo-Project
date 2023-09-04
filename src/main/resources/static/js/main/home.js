@@ -27,8 +27,6 @@ function insert_heart_cart_checked(userEmail, btn){
         if(bookISBNArray.length === 0){
             alert('상품을 하나라도 선택해주세요!')
         }else {
-            console.log(bookISBNArray)
-            console.log(btn)
             insert(btn, bookISBNArray)
         }
     }
@@ -65,16 +63,29 @@ function get_all_books(){
 function create_book_list(bookObject){
     BookContainer.innerHTML = '';
     for(book of bookObject.bookVOS){
-       BookContainer.insertAdjacentHTML('beforeend', '' +
-           '<div class="book">\n' +
-           `<input class="product_isbn" type="hidden" value="${book.isbn}">`+
-           `    <div class="check"><input class="check_btn" type="checkbox"></div>\n` +
-           `    <div class="product_img"><a href="/main/details/${book.isbn}"><img src="https://kyobo-s3-bucket.s3.ap-northeast-2.amazonaws.com/img/book/${book.isbn}/main.jpg" alt="상품이미지"></a></div>\n` +
-           `    <div class="product_title"><a href="/main/details/${book.isbn}">${book.title}</a></div>\n` +
-           `    <div class="product_author"><span>${book.author} * ${book.publisher}</span></div>\n` +
-           `    <div class="product_price"><span>${book.price}원</span></div>\n` +
-           `    <div class="heart"><input type="button" value="하트"></div>\n` +
-           '</div>')
+       BookContainer.insertAdjacentHTML('beforeend', `
+           <div class="book">
+           <input class="product_isbn" type="hidden" value="${book.isbn}">
+               <div class="check"><input class="check_btn" type="checkbox" hidden><i class="fa-regular fa-circle-check check_img" onclick="click_check_img(this)"></i></div>
+               <div class="product_img"><a href="/main/details/${book.isbn}"><img src="https://kyobo-s3-bucket.s3.ap-northeast-2.amazonaws.com/img/book/${book.isbn}/main.jpg" alt="상품이미지"></a></div>
+               <div class="product_title"><a href="/main/details/${book.isbn}">${book.title}</a></div>
+               <div class="product_author"><span>${book.author} * ${book.publisher}</span></div>
+               <div class="product_price"><span>${book.price}원</span></div>
+<!--               <div class="heart"><input type="button" value="하트"></div>-->
+           </div>`)
+    }
+}
+
+function click_check_img(e){
+    if(e.classList.contains("fa-regular")){
+        e.classList.replace("fa-regular", "fa-solid")
+        console.log(e.previousElementSibling);
+        e.previousElementSibling.checked = true;
+
+    }
+    else{
+        e.classList.replace("fa-solid", "fa-regular")
+        e.previousElementSibling.checked = false;
     }
 }
 

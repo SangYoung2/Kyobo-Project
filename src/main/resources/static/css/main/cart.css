@@ -11,9 +11,15 @@ li {
 /*==== Main ====*/
 main {
     width: 100%;
-    min-width: 1300px;
-    margin-top: 100px;
-    padding: 0 300px;
+    /*min-width: 1300px;*/
+    /*margin: 100px auto 0 auto;*/
+    /*padding: 0 300px;*/
+}
+
+.cart_wrap {
+    max-width: 1300px;
+    min-width: 1200px;
+    margin: 100px auto 0 auto;
 }
 
 /*==== order_process ====*/
@@ -62,6 +68,10 @@ main {
     border-radius: 10px;
 }
 
+.all_check_img, .check_img {
+    cursor: pointer;
+}
+
 /*==== cart_main_container ====*/
 #cart_main_container {
     min-width: 1300px;
@@ -72,7 +82,7 @@ main {
 /*==== cart_book_info ====*/
 #cart_book_info_container {
     padding: 20px;
-    width: 60%;
+    width: 70%;
 }
 
 .cart_book_info {
@@ -80,6 +90,7 @@ main {
     border-bottom: 1px solid #eaeaea;
     border-top: 1px solid #eaeaea;
     display: flex;
+    align-items: center;
 }
 
 .cart_book_info:not(:first-child){
@@ -88,6 +99,7 @@ main {
 
 .cart_book_info_left {
     display: flex;
+    align-items: center;
     flex: 3;
 }
 
@@ -97,7 +109,7 @@ main {
 
 .book_img {
     width: 100px;
-    margin: 0 1rem;
+    margin: 0 1.5rem;
 }
 
 .title {
