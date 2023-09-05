@@ -5,8 +5,10 @@
 }
 
 section {
-    margin-top: 50px;
-    padding: 0 300px;
+    width: 100%;
+    max-width: 1300px;
+    min-width: 1200px;
+    margin: 50px auto 0 auto;
 }
 
 #heart_page_control_bar {
@@ -24,6 +26,7 @@ section {
 #heart_book_container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-items: center;
     gap: 30px;
     margin: 30px 0;
 }
@@ -33,14 +36,23 @@ section {
     flex-direction: column;
     justify-content: space-evenly;
     align-items: flex-start;
-    width: 300px;
-    height: 400px;
+    width: 200px;
 }
 
 .heart_books > img {
     width: 200px;
+    margin: 10px 0;
+    border: 1px solid rgba(100, 100, 100, 0.15);
 }
 
 .all_check_img, .check_img {
     cursor: pointer;
+}
+
+.all_check_img {
+    font-size: 20px;
+}
+
+.check_img {
+    font-size: 16px;
 }

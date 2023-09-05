@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta th:name="${_csrf.parameterName}" th:content="${_csrf.token}">
+    <title>footer</title>
+    <link rel="stylesheet" href="/static/css/main/footer.css" th:href="@{/css/main/footer.css}">
+    <script src="https://kit.fontawesome.com/8b1463211e.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <footer  th:fragment="footer">
+        <hr>
+        <div class="footer_wrap">
+            <img class="logo" src="https://kyobo-s3-bucket.s3.ap-northeast-2.amazonaws.com/img/main/kyobo_logo.png" th:src="@{https://kyobo-s3-bucket.s3.ap-northeast-2.amazonaws.com/img/main/kyobo_logo.png}" alt="logo">
+            <p>대표이사 : 안병현, 김상훈 | 서울특별시 종로구 종로 1 | 사업자등록번호 : 102-81-11670</p>
+            <p>대표전화 : 1544-1900(발신자 부담전화) | FAX : 0502-987-5711(지역번호 공통) | 서울특별시 통신판매업신고번호 : 제 653호</p>
+            <p>토스페이먼츠 구매안전서비스 서비스 가입 확인</p>
+            고객님은 안전거래를 위해 현금 등으로 결제시 저희 쇼핑몰에서 가입한
+            토스페이먼츠의 구매안전서비스를 이용하실 수 있습니다.
+        </div>
+    </footer>
+</body>
+</html>

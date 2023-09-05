@@ -1,0 +1,11 @@
+footer {
+    height: 200px;
+}
+
+.footer_wrap {
+    width: 100%;
+    height: 80%;
+    max-width: 1300px;
+    min-width: 1200px;
+    margin: 20px auto;
+}
