@@ -194,7 +194,7 @@ function book_order(){
     };
     CheckBox.forEach(x => {
         if (x.checked){
-            const bookISBN = x.nextElementSibling;
+            const bookISBN = x.nextElementSibling.nextElementSibling;
             const bookCount = x.parentElement.nextElementSibling.querySelector('.book_count_value');
             const bookInfoObj = {bookISBN : bookISBN.value, bookCount : bookCount.value}
             body.cartVOS.push(bookInfoObj);

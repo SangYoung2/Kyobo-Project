@@ -7,7 +7,7 @@ const SearchResultCountSelect =document.getElementById('search_result_count_sele
 const BookPageList = document.getElementById('book_page_list')
 
 get_all_books_by_condition("", "rating", 8, 1);
-
+get_all_books()
 // 책 찜하기/장바구니 넣기 공통 처리 부분
 // (버튼 눌렀을 시 => 데이터 생성, 가능여부 체크)
 function insert_heart_cart_checked(userEmail, btn){
@@ -49,11 +49,11 @@ function insert(clickedBtn, bookISBNArray){
 }
 
 function get_all_books(){
-    fetch('main/books')
+    const productCount = document.querySelector(".product_count")
+    fetch('/admin/books')
         .then(response => response.json())
         .then(value => {
-            create_book_list(value)
-            create_list_of_paging(value)
+            productCount.innerText = "전체 " + value.length + "건"
         })
         .catch(reason => {
             console.log(reason)

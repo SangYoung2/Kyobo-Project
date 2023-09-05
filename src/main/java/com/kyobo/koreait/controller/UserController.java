@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.PermitAll;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -79,12 +80,6 @@ public class UserController {
         return "redirect:/";
     }
 
-    @PreAuthorize("isAuthenticated()")
-    @GetMapping("/myPage/main")
-    public void myPage_user(){
-        log.info(" ===== user_mypage =====");
-    }
-
     @ResponseBody
     @GetMapping("/cart")
     public List<CartDTO> get_cart(
@@ -129,6 +124,7 @@ public class UserController {
         return userService.delete_book_in_cart(userDetails.getUsername(), cartVOS);
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/myPage/heart")
     public void heart_page(){
 
@@ -178,7 +174,7 @@ public class UserController {
         if(!orderResult){
             return "error/main";
         }
-        return "main/order";
+        return "/main/order";
     }
 
     @PreAuthorize("isAuthenticated()")
@@ -189,18 +185,26 @@ public class UserController {
     ){
         log.info("===== myPage_order =====");
         List<PaymentVO> paymentVOS = userService.get_payment(userDetails.getUsername());
+        log.info("paymentVOS = " + paymentVOS);
         model.addAttribute("paymentVOS", paymentVOS);
     }
 
-    @PreAuthorize("isAuthenticated()")
-    @GetMapping("/myPage/order/detail/{orderNo}")
-    public String myPage_order_detail(
-            @PathVariable String orderNo,
-            Model model
-    ){
-        log.info("===== myPage_order =====");
-        List<CartDTO> cartDTOS = userService.get_order(orderNo);
-        model.addAttribute("cartDTOS", cartDTOS);
-        return "user/myPage/order/detail";
+//    @GetMapping("/myPage/order/detail/{orderNo}")
+//    public String myPage_order_detail(
+//            @PathVariable String orderNo,
+//            Model model
+//    ){
+//        log.info("===== myPage_order =====");
+//        List<CartDTO> cartDTOS = userService.get_order(orderNo);
+//        model.addAttribute("cartDTOS", cartDTOS);
+//        return "user/myPage/order/detail";
+//    }
+
+    @ResponseBody
+    @PermitAll
+    @PostMapping("/myPage/order/detail/{orderNo}")
+    public List<CartDTO> get_order_detail(@PathVariable String orderNo){
+        log.info("===== get_detail_order =====");
+        return userService.get_order(orderNo);
     }
 }

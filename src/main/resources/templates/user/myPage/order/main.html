@@ -5,27 +5,43 @@
 >
 <head>
 	<meta charset="UTF-8">
-	<title>Title</title>
+	<meta th:name="${_csrf.parameterName}" th:content="${_csrf.token}">
+	<title>주문내역</title>
+	<link rel="stylesheet" href="/static/css/main/header.css" th:href="@{/css/main/header.css}">
+	<link rel="stylesheet" href="/static/css/main/footer.css" th:href="@{/css/main/footer.css}">
+	<link rel="stylesheet" href="/static/css/user/myPage/myPageMenu.css" th:href="@{/css/user/myPage/myPageMenu.css}">
+	<link rel="stylesheet" href="/static/css/user/myPage/order/main.css" th:href="@{/css/user/myPage/order/main.css}">
+	<script src="/static/js/user/myPage/order/main.js" th:src="@{/js/user/myPage/order/main.js}" defer></script>
 </head>
 <body>
-	<h3>주문 내역 페이지입니다.</h3>
+	<th:block th:replace="~{main/header :: header}"></th:block>
+	<th:block th:replace="~{user/myPage/myPage_menu :: myPageMenu}"></th:block>
+	<section class="order_wrap">
+	<h3>주문내역</h3>
+		<article class="order_table_wrap">
+			<h1 th:unless="${paymentVOS.size >= 1}">주문 내역이 없습니다.</h1>
+			<table border="1px" th:if="${paymentVOS.size >= 1}">
 
-	<table border="1px" style="text-align: center">
-		<thead>
-			<tr>
-				<td>주문 번호</td>
-				<td>결제 일시</td>
-				<td>총 가격</td>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="paymentVO : ${paymentVOS}" >
-				<td><a th:href="@{/user/myPage/order/detail/} + ${paymentVO.orderNo}">[[${paymentVO.orderNo}]]</a></td>
-				<td th:text="${#dates.format(paymentVO.orderTime, 'yyyy-MM-dd HH:mm:ss')}">[[${paymentVO.orderTime}]]</td>
-				<td>[[${paymentVO.paymentAmount}]]</td>
-			</tr>
-		</tbody>
-	</table>
-	<a th:href="@{/}">메인페이지로 돌아가기</a>
+				<thead>
+					<tr>
+						<td>주문번호</td>
+						<td>결제일</td>
+						<td>결제액</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="paymentVO : ${paymentVOS}">
+						<td><span class="order_no" th:onclick="get_detail_order(this)">[[${paymentVO.orderNo}]]</span></td>
+						<td th:text="${#dates.format(paymentVO.orderTime, 'yyyy-MM-dd HH:mm:ss')}">[[${paymentVO.orderTime}]]</td>
+						<td>[[${paymentVO.paymentAmount}]]</td>
+					</tr>
+				</tbody>
+			</table>
+			<table class="detail_order_table">
+
+			</table>
+		</article>
+	</section>
+	<th:block th:replace="~{main/footer :: footer}"></th:block>
 </body>
 </html>

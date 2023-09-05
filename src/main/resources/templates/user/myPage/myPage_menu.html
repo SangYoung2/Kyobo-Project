@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta th:name="${_csrf.parameterName}" th:content="${_csrf.token}">
+    <link rel="stylesheet" href="/static/css/user/myPage/myPageMenu.css" th:href="@{css/user/myPage/myPageMenu.css}">
+</head>
+<body>
+    <nav th:fragment="myPageMenu">
+        <a href="/user/myPage/heart">찜 목록</a>
+        <a href="/user/myPage/order/main">주문 내역</a>
+    </nav>
+</body>
+</html>
