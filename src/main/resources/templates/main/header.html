@@ -28,7 +28,7 @@
                 <a href="/user/register">회원가입</a>
             </th:block>
             <th:block sec:authorize="isAuthenticated()">
-                <a href="/user/logout">로그아웃</a>
+                <a class="logout">로그아웃</a>
                 <a href="/main/cart">장바구니</a>
                 <a href="/user/myPage/heart">마이페이지</a>
                 <a href="/admin/main" sec:authorize="hasRole('ADMIN')">관리페이지</a>
@@ -36,6 +36,14 @@
         </div>
     </div>
     <hr>
+    <script>
+        const LogoutBtn = document.querySelector(".logout")
+        LogoutBtn.onclick = () => {
+            if (confirm("로그아웃 하시겠습니까?")){
+                location.href = "/user/logout"
+            }
+        }
+    </script>
 </header>
 </body>
 </html>

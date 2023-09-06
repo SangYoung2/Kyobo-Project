@@ -8,10 +8,11 @@ const BookPageList = document.getElementById('book_page_list')
 
 get_all_books_by_condition("", "rating", 8, 1);
 get_all_books()
+
 // 책 찜하기/장바구니 넣기 공통 처리 부분
 // (버튼 눌렀을 시 => 데이터 생성, 가능여부 체크)
 function insert_heart_cart_checked(userEmail, btn){
-    if(userEmail === ''){
+    if(userEmail === 'anonymousUser'){
         alert("로그인을 해주셔야합니다.")
     }else {
         const bookISBNArray = [];
@@ -44,7 +45,14 @@ function insert(clickedBtn, bookISBNArray){
             body: JSON.stringify(bookISBNArray)
         })
         .then(value => value.text())
-        .then(value => {console.log(value);})
+        .then(value => {
+            if (clickedBtn.getAttribute('id') === 'heart_btn') {
+                alert("찜 목록에 등록 완료하였습니다.")
+            }
+            else {
+                alert("장바구니에 등록 완료하셨습니다.")
+            }
+        })
         .catch(reason => {console.log(reason);})
 }
 
@@ -78,8 +86,7 @@ function create_book_list(bookObject){
 
 function click_check_img(e){
     if(e.classList.contains("fa-regular")){
-        e.classList.replace("fa-regular", "fa-solid")
-        console.log(e.previousElementSibling);
+        e.classList.replace("fa-regular", "fa-solid");
         e.previousElementSibling.checked = true;
 
     }

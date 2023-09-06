@@ -5,6 +5,10 @@ section {
     margin: 0 auto;
 }
 
+button {
+    background: none;
+}
+
 #heart_page_control_bar {
     display: flex;
     justify-content: space-between;
@@ -17,8 +21,17 @@ section {
     border-radius: 5px;
 }
 
+#heart_page_control_bar button {
+    margin-right: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 7.5px;
+    cursor: pointer;
+}
+
 #heart_book_container {
     display: grid;
+    min-height: 600px;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     justify-items: center;
     gap: 30px;

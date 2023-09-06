@@ -66,7 +66,7 @@ function btn_checked(btn){
     if(bookISBNArray.length === 0){
         alert('상품을 하나라도 선택해주세요!')
     }else {
-        if(btn.value === "삭제"){
+        if(btn.innerText === "삭제"){
             delete_heart_books(bookISBNArray);
         }
         else {
@@ -91,6 +91,7 @@ function delete_heart_books(bookISBNArray){
                 if(value === 'true'){
                     get_all_books();
                     bookISBNArray.splice(0, bookISBNArray.length)}
+                    alert("찜 목록에서 삭제 완료하였습니다.")
                     location.reload()
             })
             .catch(reason => {
@@ -109,6 +110,8 @@ function insert_cart_books(bookISBNArray) {
             body: JSON.stringify(bookISBNArray)
         })
         .then(value => value.text())
-        .then(value => {console.log(value);})
+        .then(value => {
+            alert("장바구니에 등록 완료하셨습니다.")
+        })
         .catch(reason => {console.log(reason);})
 }

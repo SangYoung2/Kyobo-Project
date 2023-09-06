@@ -9,7 +9,9 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +19,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.PermitAll;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -37,16 +41,19 @@ public class UserController {
         return "redirect:/";
     }
 
+//    로그아웃 페이지로 이동하여 로그아웃 버튼을 눌러 로그아웃 하는 방식
+//    @GetMapping("/logout")
+//    public void logout(){log.info("===== 유저 로그아웃 =====");}
+
     @GetMapping("/logout")
-    public void logout(){
-        log.info("===== 유저 로그아웃 =====");
+    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
+        // SpringSecurity를 이용하여 로그아웃을 할 시 POST요청을 해야하지만  아래 방법으로 GET방법으로 우회하여 사용할수있다.
+        new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder.getContext().getAuthentication());
+        return "redirect:/";
     }
 
     @GetMapping("/register")
-    public void register_user(){
-
-    }
-
+    public void register_user(){}
 
     @PostMapping("/register")
     public String register_user(@Validated UserVO userVO,
@@ -188,17 +195,6 @@ public class UserController {
         log.info("paymentVOS = " + paymentVOS);
         model.addAttribute("paymentVOS", paymentVOS);
     }
-
-//    @GetMapping("/myPage/order/detail/{orderNo}")
-//    public String myPage_order_detail(
-//            @PathVariable String orderNo,
-//            Model model
-//    ){
-//        log.info("===== myPage_order =====");
-//        List<CartDTO> cartDTOS = userService.get_order(orderNo);
-//        model.addAttribute("cartDTOS", cartDTOS);
-//        return "user/myPage/order/detail";
-//    }
 
     @ResponseBody
     @PermitAll

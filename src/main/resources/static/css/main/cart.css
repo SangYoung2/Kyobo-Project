@@ -8,6 +8,9 @@ li {
     list-style: none;
 }
 
+button {
+    background: none;
+}
 /*==== Main ====*/
 main {
     width: 100%;
@@ -19,7 +22,8 @@ main {
 .cart_wrap {
     max-width: 1300px;
     min-width: 1200px;
-    margin: 100px auto 0 auto;
+    min-height: 600px;
+    margin: 50px auto 0 auto;
 }
 
 /*==== order_process ====*/
@@ -69,6 +73,14 @@ main {
 }
 
 .all_check_img, .check_img {
+    cursor: pointer;
+}
+
+#cart_control_bar button {
+    margin-right: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 7.5px;
     cursor: pointer;
 }
 

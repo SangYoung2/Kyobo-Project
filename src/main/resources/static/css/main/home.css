@@ -18,6 +18,10 @@ li {
     list-style: none;
 }
 
+button {
+    background: none;
+}
+
 /*===== Section 1 =====*/
 .book_wrap {
     width: 100%;
@@ -28,17 +32,23 @@ li {
 
 #book_nav {
     width: 100%;
+    height: 40px;
     display: flex;
     justify-content: space-between;
-    margin: 30px 0;
+    align-items: center;
+    margin: 20px 0;
 }
 
 .book_nav_right {
     display: flex;
 }
 
-.book_nav_right > input {
+.book_nav_right > button {
     margin-right: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 7.5px;
+    cursor: pointer;
 }
 
 /*===== Section 2 =====*/

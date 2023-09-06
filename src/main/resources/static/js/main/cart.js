@@ -145,6 +145,11 @@ function delete_heart_cart(btn){
             .then(value => value.text())
             .then(value => {
                 if(value === 'true'){
+                    if(btn === 'heart') {
+                        alert("찜 목록에 등록 완료하였습니다.")
+                    } else  {
+                        alert("장바구니에서 삭제 완료하였습니다.")
+                    }
                     get_cart();
                     bookISBNArray.splice(0, bookISBNArray.length)}
                     location.reload()
