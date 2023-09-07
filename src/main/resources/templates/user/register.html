@@ -8,11 +8,14 @@
     <meta charset="UTF-8">
     <meta th:name="${_csrf.parameterName}" th:content="${_csrf.token}">
     <title>회원가입</title>
+    <link rel="stylesheet" href="/static/css/main/header.css" th:href="@{/css/main/header.css}">
+    <link rel="stylesheet" href="/static/css/main/footer.css" th:href="@{/css/main/footer.css}">
     <link rel="stylesheet" href="/static/css/user/register.css" th:href="@{/css/user/register.css}">
     <script src="/js/user/register.js" th:src="@{/js/user/register.js}" defer></script>
 </head>
 <body>
-    <form th:action="@{/user/register}" th:method="post">
+    <th:block th:replace="~{main/header :: header}"></th:block>
+    <form th:action="@{/user/register}" th:method="post" class="register_wrap">
         <input type="hidden" th:name="${_csrf.parameterName}" th:content="${_csrf.token}">
         <h1>교보문고 회원가입</h1>
         <div class="info_box">
@@ -62,5 +65,6 @@
         <input id="register_btn" type="button" value="회원가입">
         <input id="back_btn" type="button" value="돌아가기">
     </form>
+    <th:block th:replace="~{main/footer :: footer}"></th:block>
 </body>
 </html>

@@ -1,0 +1,9 @@
+nav {
+    max-width: 1300px;
+    min-width: 1200px;
+    margin: 20px auto;
+}
+
+nav > a {
+    margin-right: 10px;
+}

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<link rel="stylesheet" href="/static/css/main/header.css" th:href="@{/css/main/header.css}">
+<link rel="stylesheet" href="/static/css/main/footer.css" th:href="@{/css/main/footer.css}">
 <link rel="stylesheet" href="/static/css/user/login.css" th:href="@{/css/user/login.css}">
 <script src="/js/user/login.js" th:src="@{/css/login.js}"></script>
 <head>
@@ -8,6 +10,7 @@
     <title>LOGIN</title>
 </head>
 <body>
+    <th:block th:replace="~{main/header :: header}"></th:block>
     <form action="/user/login" th:action="@{/user/login}" method="post">
         <h1>KOREAIT KYOBO 교보문고</h1>
         <div class="input_box">
@@ -27,5 +30,6 @@
         <input type="button" value="회원가입" onclick="location.href= '/user/register'">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
     </form>
+    <th:block th:replace="~{main/footer :: footer}"></th:block>
 </body>
 </html>

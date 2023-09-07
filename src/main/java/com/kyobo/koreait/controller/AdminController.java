@@ -34,7 +34,6 @@ public class AdminController {
     @Value("${com.kyobo.koreait.upload.path}")
     private String uploadPath;
 
-    @PermitAll
     @GetMapping("/upload")
     public void upload_book(){
        log.info("===== upload 화면 =====");

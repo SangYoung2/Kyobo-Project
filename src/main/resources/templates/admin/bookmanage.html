@@ -7,23 +7,36 @@
     <meta charset="UTF-8">
     <meta th:name="${_csrf.parameterName}" th:content="${_csrf.token}">
     <title>파일 관리</title>
+	<link rel="stylesheet" href="/static/css/main/footer.css" th:href="@{/css/main/footer.css}">
+	<link rel="stylesheet" href="/static/css/admin/adminNav.css" th:href="@{/css/admin/adminNav.css}">
+	<link rel="stylesheet" href="/static/css/main/header.css" th:href="@{/css/main/header.css}">
 	<script src="/static/js/admin/manage.js" th:src="@{/js/admin/manage.js}" defer></script>
     <script src="https://kit.fontawesome.com/8b1463211e.js" crossorigin="anonymous"></script>
+	<style>
+		table {
+			width: 100%;
+			max-width: 1300px;
+			min-width: 1200px;
+			margin: 50px auto;
+		}
+	</style>
 </head>
 <body>
+	<th:block th:replace="~{main/header :: header}"></th:block>
+	<th:block th:replace="~{admin/adminNav :: adminNav}"></th:block>
 	<table border="1px">
-		<thead>
-			<tr>
-				<td>ISBN</td>
-				<td>제목</td>
-				<td>작가</td>
-				<td>출판사</td>
-				<td>관리</td>
-			</tr>
-		</thead>
-		<tbody id="book_info_container">
-		</tbody>
-	</table>
-	<a href="/admin/main">관리페이지로 돌아가기</a>
+			<thead>
+				<tr>
+					<td>ISBN</td>
+					<td>제목</td>
+					<td>작가</td>
+					<td>출판사</td>
+					<td>관리</td>
+				</tr>
+			</thead>
+			<tbody id="book_info_container">
+			</tbody>
+		</table>
+	<th:block th:replace="~{main/footer :: footer}"></th:block>
 </body>
 </html>
