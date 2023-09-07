@@ -10,10 +10,10 @@
     <script src="https://kit.fontawesome.com/8b1463211e.js" crossorigin="anonymous"></script>
 </head>
 <body>
-	<h1>관리페이지</h1>
-	<a href="/admin/upload" sec:authorize="hasRole('ADMIN')">파일 업로드</a> <br/>
-	<a href="/admin/manage" sec:authorize="hasRole('ADMIN')">파일 관리</a> <br/>
-	<a href="/admin/usermanage" sec:authorize="hasRole('ADMIN')">회원 관리</a> <br/>
-	<a href="/">메인페이지로 돌아가기</a>
+    <nav th:fragment="adminNav">
+        <a href="/admin/upload" sec:authorize="hasRole('ADMIN')">파일 업로드</a>
+        <a href="/admin/bookmanage" sec:authorize="hasRole('ADMIN')">파일 관리</a>
+        <a href="/admin/usermanage" sec:authorize="hasRole('ADMIN')">회원 관리</a>
+    </nav>
 </body>
 </html>

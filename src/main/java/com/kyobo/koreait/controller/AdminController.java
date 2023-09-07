@@ -34,11 +34,6 @@ public class AdminController {
     @Value("${com.kyobo.koreait.upload.path}")
     private String uploadPath;
 
-    @GetMapping("/main")
-    public void admin_main(){
-        log.info("===== admin_main 화면 =====");
-    }
-
     @PermitAll
     @GetMapping("/upload")
     public void upload_book(){
@@ -86,8 +81,8 @@ public class AdminController {
         return Arrays.asList("main." + mainImageFileContents, "contents." + contentsImageFileContents);
     }
 
-    @GetMapping("/manage")
-    public void get_manage(){
+    @GetMapping("/bookmanage")
+    public void get_bookmanage(){
         log.info("===== ManagePage =====");
     }
 
