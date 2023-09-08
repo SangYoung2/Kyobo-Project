@@ -20,22 +20,23 @@
         <h1>교보문고 회원가입</h1>
         <div class="info_box">
             <p>아이디(이메일)</p>
-            <div class="flex_text_btn">
-                <input type="text" name="email">
-                <input type="button" value="중복체크" onclick="email_authenticated()">
-            </div>
+            <input type="text" name="email">
+            <span>4~12자리의 영문자, 숫자로 입력</span>
         </div>
         <div class="info_box">
             <p>비밀번호</p>
-            <input type="text" name="password">
+            <input type="password" name="password">
+            <span>영문자, 숫자, 특수문자(!,@,#)를 4~20자리 입력</span>
         </div>
         <div class="info_box">
             <p>비밀번호 재확인</p>
-            <input type="text" name="password_confirm">
+            <input type="password" name="password_confirm">
+            <span>비밀번호를 다시 한번 입력</span>
         </div>
         <div class="info_box">
             <p>이름</p>
             <input type="text" name="name">
+            <span></span>
         </div>
         <div class="info_box">
             <p>생년월일</p>
@@ -49,6 +50,7 @@
                     <option>일</option>
                 </select>
             </div>
+            <span></span>
         </div>
         <div class="info_box">
             <p>휴대전화</p>
@@ -61,6 +63,7 @@
                 <input type="text" name="phone_auth" placeholder="인증번호를 입력하세요">
                 <input type="button"  value="인증확인" onclick="phoneNumber_authenticate_confirm()">
             </div>
+            <span>'-'를 빼고 입력해주세요</span>
         </div>
         <input id="register_btn" type="button" value="회원가입">
         <input id="back_btn" type="button" value="돌아가기">

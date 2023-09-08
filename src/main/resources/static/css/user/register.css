@@ -52,6 +52,11 @@
     margin: 5px 0;
 }
 
+.info_box > span {
+    color: gray;
+    font-size: 12px;
+}
+
 .flex_text_btn {
     display: flex;
     margin-bottom: 5px;
