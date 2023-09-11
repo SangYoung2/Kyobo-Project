@@ -44,10 +44,10 @@
                 <input type="hidden" name="birth">
                 <input type="text" id="year" placeholder="(년)4자리" maxlength="4">
                 <select id="month">
-                    <option>월</option>
+                    <option value="월">월</option>
                 </select>
                 <select id="day">
-                    <option>일</option>
+                    <option value="일">일</option>
                 </select>
             </div>
             <span></span>
@@ -56,12 +56,12 @@
             <p>휴대전화</p>
             <div class="flex_text_btn">
                 <input type="text" id="phone" placeholder="전화번호를 입력하세요" maxlength="11">
-                <input type="button" value="인증번호 받기" onclick="phoneNumber_authenticate()">
+                <input type="button" value="인증번호 받기" onclick="phoneNumber_authenticate(this)">
                 <input type="hidden" name="phone">
             </div>
             <div class="flex_text_btn">
-                <input type="text" name="phone_auth" placeholder="인증번호를 입력하세요">
-                <input type="button"  value="인증확인" onclick="phoneNumber_authenticate_confirm()">
+                <input type="text" name="phone_auth" placeholder="인증번호를 입력하세요" maxlength="4">
+                <input type="button"  value="인증확인" onclick="phoneNumber_authenticate_confirm(this)">
             </div>
             <span>'-'를 빼고 입력해주세요</span>
         </div>
