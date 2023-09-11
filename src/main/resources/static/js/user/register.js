@@ -24,7 +24,10 @@ const PhoneAuth = document.querySelector('input[name="phone_auth"]')
 /* Check */
 let EmailCheck = false;
 let PasswordCheck = false;
+let NameCheck = false;
+let YearCheck = false;
 let PhoneCheck = false;
+let PhoneAuthCheck = false;
 
 function create_user_month_value(){
     for (let i = 1; i <= 12; i++) {
@@ -43,6 +46,9 @@ function create_user_day_value(){
 }
 
 function phoneNumber_authenticate(){
+    if(!PhoneCheck){
+        alert("핸드폰 번호를 올바르게 입력해주세요!")
+    }
     fetch('/api/sms/' + Phone.value)
         .then(value => {
             if(value.ok){
@@ -65,7 +71,7 @@ function phoneNumber_authenticate_confirm(){
         })
         .then(value => {
             console.log(value)
-            PhoneCheck = true;
+            PhoneAuthCheck = true;
         })
         .catch(reason => {console.log(reason)})
 }
@@ -141,18 +147,20 @@ PasswordConfirm.onchange = () => {
 UserName.onchange = () => {
     const nameReg = RegExp(/^[가-힣a-zA-Z]{2,15}$/);
     const comment = UserName.nextElementSibling;
+    NameCheck = false
 
     if(UserName.value.length === 0 || UserName.value === "" || RegExp(/\s/).test(UserName.value)){
-        comment.innerText = "이름을 입력해주세요."
+        comment.innerText = "이름을 입력해주세요.";
         comment.style.color = "red";
     }
     else if(!nameReg.test(UserName.value)){
-        comment.innerText = "2~15자리의 한글, 영문자로 입력해주세요."
+        comment.innerText = "2~15자리의 한글, 영문자로 입력해주세요.";
         comment.style.color = "red";
     }
     else {
         comment.innerText = "올바르게 입력하셨습니다."
         comment.style.color = "green"
+        NameCheck = true;
     }
 }
 
@@ -176,6 +184,7 @@ Year.onchange = () => {
     else {
         comment.innerText = "올바르게 입력하셨습니다.";
         comment.style.color = "green";
+        YearCheck = true;
     }
 }
 
@@ -198,6 +207,7 @@ Phone.onchange = () => {
     else {
         comment.innerText = "올바르게 입력하셨습니다."
         comment.style.color = "green";
+        PhoneCheck = true
     }
 }
 
@@ -210,23 +220,11 @@ RegisterBtn.onclick = () => {
         userPhoneLength === 11 ?
             userPhoneValue.substring(0, 3) + '-' + userPhoneValue.substring(3, 7) + '-' + userPhoneValue.substring(7, 11) :
             userPhoneValue.substring(0, 3) + '-' + userPhoneValue.substring(3, 6) + '-' + userPhoneValue.substring(6, 10);
-    if(UserEmail.value !== "" && Password.value !== "" && PasswordConfirm.value !== ""
-        && UserName.value !== "" && Birth.value !== "" && PhoneValue.value !== ""){
-        if(EmailCheck && PasswordCheck && PhoneCheck){
-            ResisterForm.submit();
-        }
-        else if(!EmailCheck){
-            alert("이메일 확인을 해주세요!")
-        }
-        else if(!PasswordCheck){
-            alert("패스워드 확인을 해주세요!")
-        }
-        else {
-            alert("핸드폰 인증번호 확인을 해주세요!")
-        }
+    if(EmailCheck && PasswordCheck && NameCheck && YearCheck && PhoneAuthCheck){
+        ResisterForm.submit();
     }
     else {
-        alert("빈칸없이 모든 정보를 입력해주세요")
+        alert("모든 정보를 입력해주세요")
     }
 }
 
