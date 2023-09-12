@@ -3,7 +3,6 @@ package com.kyobo.koreait.controller;
 import com.kyobo.koreait.domain.vos.dtos.BookDTO;
 import com.kyobo.koreait.domain.vos.BookVO;
 import com.kyobo.koreait.service.MainService;
-import com.kyobo.koreait.util.S3Uploader;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;

@@ -87,8 +87,10 @@ function phoneNumber_authenticate_confirm(e){
                 comment.innerText = "인증되었습니다.";
                 PhoneAuthCheck = true;
             }
-            comment.style.color = "red"
-            comment.innerText = "인증번호가 일치하지 않습니다."
+            else {
+                comment.style.color = "red"
+                comment.innerText = "인증번호가 일치하지 않습니다."
+            }
 
         })
         .catch(reason => {
