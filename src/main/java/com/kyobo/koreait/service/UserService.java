@@ -99,9 +99,9 @@ public class UserService {
         List<CartVO> cartVOS = orderDTO.getCartVOS();
         
         // 결제 내역에 추가하기
-        boolean paymentSucceed =  userMapper.insert_payment(paymentVO);
+        boolean paymentSucceed = userMapper.insert_payment(paymentVO);
         // 주문 내역에 추가하기
-        boolean orderSucceed =  userMapper.insert_order(cartVOS);
+        boolean orderSucceed = userMapper.insert_order(cartVOS);
         // 장바구니에 있는 내역 삭제하기
         boolean removeSucceed = delete_book_in_cart(userEmail, cartVOS);
         

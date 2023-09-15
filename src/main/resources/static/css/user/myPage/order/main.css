@@ -7,28 +7,42 @@
 }
 
 h3 {
+    display: inline-block;
     margin-bottom: 30px;
+    margin-right: 20px;
 }
 
 .order_table_wrap {
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
+    position: relative;
 }
 
 table {
-    margin-right: 50px;
+    display: inline-block;
     text-align: center;
+    border-collapse: collapse;
+}
+
+.payment_table {
+    margin-right: 50px;
+}
+
+th, tr, td {
+    padding: 0 10px;
+    border: 1px solid black;
+    height: 30px;
+    line-height: 30px;
+}
+
+td {
+    height: 30px;
+    max-height: 30px;
+    line-height: 30px;
 }
 
 .order_no {
     cursor: pointer;
-}
-
-td {
-    padding: 0 10px;
-    height: 30px;
-    max-height: 30px;
-    line-height: 30px;
 }
 
 .detail_order_table {

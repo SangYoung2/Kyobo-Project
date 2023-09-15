@@ -123,7 +123,7 @@ function book_page_li_clicked(li){
 
 //키워드를 통해 책들 정보 받아오기
 function get_all_books_by_condition(searchKeyword, order, pagePerArticle, nowPage){
-    let URL =  `/main/books`;  //기본 URL
+    let URL =  `/main/books`;                     //기본 URL
     URL += '?order=' + order;                            //순서 조건
     URL += '&pagePerArticle=' + pagePerArticle;          //페이지당 보여줄 개수
     URL += '&nowPage=' + nowPage;                        //현재 페이지 번호

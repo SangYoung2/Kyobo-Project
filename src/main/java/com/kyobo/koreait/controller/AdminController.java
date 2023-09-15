@@ -9,6 +9,7 @@ import com.kyobo.koreait.util.S3Uploader;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,18 +35,18 @@ public class AdminController {
     @Value("${com.kyobo.koreait.upload.path}")
     private String uploadPath;
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/upload")
     public void upload_book(){
        log.info("===== upload 화면 =====");
     }
 
-    @PermitAll
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/upload")
     public void upload_book_data(UploadBookDTO uploadBookDTO) throws Exception{
         log.info("===== upload_book_data - 게시물 작성 =====");
         log.info("uploadBookDTO ==> " + uploadBookDTO);
         BookVO bookVO = uploadBookDTO.getBookVO();
-        log.info("getBookVO = " + bookVO);
         adminService.insert_new_book(bookVO);
         List<String> fileNames = save_book_data(uploadBookDTO.getMainImageFile(), uploadBookDTO.getContentsImageFile(), bookVO.getISBN());
         List<String> uploadImageUrls = s3Uploader.upload(bookVO.getISBN(), uploadPath, fileNames);
@@ -80,6 +81,7 @@ public class AdminController {
         return Arrays.asList("main." + mainImageFileContents, "contents." + contentsImageFileContents);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/bookmanage")
     public void get_bookmanage(){
         log.info("===== ManagePage =====");
@@ -100,6 +102,7 @@ public class AdminController {
         return adminService.delete_book_data(bookISBN);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/bookmodify")
     public void get_book_modify(String bookISBN, Model model){
         log.info("===== bookModify Page =====");
@@ -126,9 +129,10 @@ public class AdminController {
 
         adminService.modify_book_data(bookVO);
 
-        return "redirect:/admin/manage";
+        return "redirect:/admin/bookmodify";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/usermanage")
     public void get_usermanage() {
         log.info("===== userManage Page =====");

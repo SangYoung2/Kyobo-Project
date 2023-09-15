@@ -1,5 +1,7 @@
 const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute("content")
 const detailOrderContents = document.querySelector(".detail_order_table")
+const orderTitle = document.querySelector(".order_title")
+const orderNo = orderTitle.querySelector("span")
 function get_detail_order(e){
     let orderNo = e.innerText
     fetch('/user/myPage/order/detail/' + orderNo, {
@@ -11,22 +13,22 @@ function get_detail_order(e){
     })
         .then(response => response.json())
         .then(value => {
-            create_detail_order_contents(value);
+            create_detail_order_contents(value, orderNo);
         })
         .catch(reason => console.log(reason))
 }
 
-function create_detail_order_contents(cartBooks) {
+function create_detail_order_contents(cartBooks, no) {
     detailOrderContents.innerHTML = "";
-    detailOrderContents.border = "1px";
+    orderNo.innerText = `주문번호 : ${no}`
     detailOrderContents.insertAdjacentHTML("beforeend",
         `
             <thead>
                 <tr>
-                    <td>순번</td>
-                    <td>책 제목</td>
-                    <td>수량</td>
-                    <td>가격</td>
+                    <th>도서번호</th>
+                    <th>책 제목</th>
+                    <th>수량</th>
+                    <th>가격</th>
                 </tr>
             </thead>
         `)

@@ -1,0 +1,31 @@
+.contents_upload_wrap {
+    max-width: 800px;
+    min-width: 700px;
+    margin: 50px auto;
+}
+
+.contents_upload_wrap > h2 {
+    margin-bottom: 10px;
+}
+
+.contents_upload_wrap div {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.contents_upload_wrap div > span {
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+
+.contents_upload_wrap div > input {
+    height: 30px;
+    font-size: 16px;
+}
+
+.contents_upload_wrap div > textarea {
+    height: 100px;
+    resize: none;
+    font-size: 16px;
+}

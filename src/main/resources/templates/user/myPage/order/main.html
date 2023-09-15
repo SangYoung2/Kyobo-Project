@@ -17,10 +17,13 @@
 	<th:block th:replace="~{main/header :: header}"></th:block>
 	<th:block th:replace="~{user/myPage/myPage_menu :: myPageMenu}"></th:block>
 	<section class="order_wrap">
-	<h3>주문내역</h3>
+		<div class="order_title">
+			<h3>주문내역</h3>
+			<span></span>
+		</div>
 		<article class="order_table_wrap">
 			<h1 th:unless="${paymentVOS.size >= 1}">주문 내역이 없습니다.</h1>
-			<table border="1px" th:if="${paymentVOS.size >= 1}">
+			<table class="payment_table" th:if="${paymentVOS.size >= 1}">
 				<thead>
 					<tr>
 						<td>주문번호</td>
@@ -37,7 +40,6 @@
 				</tbody>
 			</table>
 			<table class="detail_order_table">
-
 			</table>
 		</article>
 	</section>

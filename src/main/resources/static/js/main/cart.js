@@ -217,8 +217,11 @@ function book_order(){
             body: JSON.stringify(body)})
             .then(value => value.text())
             .then(value => {
+                if(confirm("주문내역 페이지로 이동 하시겠습니까?")){
                     location.href = value
-                delete_heart_cart('delete')
+                }else {
+                    location.reload();
+                }
             })
             .catch(reason => {
                 console.log(reason)});

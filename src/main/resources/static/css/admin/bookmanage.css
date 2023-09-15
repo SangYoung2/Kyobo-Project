@@ -1,0 +1,17 @@
+section {
+    min-height: 600px;
+}
+
+table {
+    width: 100%;
+    max-width: 1300px;
+    min-width: 1200px;
+    margin: 50px auto;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+tr, td, th {
+    border: 1px solid black;
+    padding: 10px;
+}

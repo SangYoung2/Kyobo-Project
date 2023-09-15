@@ -153,7 +153,6 @@ public class UserController {
     public List<BookVO> get_books_in_heart(
             @AuthenticationPrincipal UserDetails userDetails
     ){
-
         log.info("===== GET_BOOKS_IN_HEART =====");
         return userService.get_book_in_heart(userDetails.getUsername());
     }
@@ -181,7 +180,7 @@ public class UserController {
         if(!orderResult){
             return "error/main";
         }
-        return "/main/order";
+        return "/user/myPage/order/main";
     }
 
     @PreAuthorize("isAuthenticated()")

@@ -30,7 +30,7 @@ public class MainController {
         log.info(" ====== 장바구니 페이지 (cart) ========");
     }
 
-    // 책 제목 혹은 이미지 클릭했을 때 책의 상세정보 페이지로 이동하는 메소드
+    // 메인페이지에 제품을 불러올 때 조건을 확인하여 불러온다.
     @ResponseBody
     @GetMapping("/main/books")
     public BookDTO get_all_books_by_condition(

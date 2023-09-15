@@ -10,34 +10,31 @@
     <link rel="stylesheet" href="/static/css/main/header.css" th:href="@{/css/main/header.css}">
     <link rel="stylesheet" href="/static/css/main/footer.css" th:href="@{/css/main/footer.css}">
     <link rel="stylesheet" href="/static/css/admin/adminNav.css" th:href="@{/css/admin/adminNav.css}">
+    <link rel="stylesheet" href="/static/css/admin/usermanage.css" th:href="@{/css/admin/usermanage.css}">
     <script src="https://kit.fontawesome.com/8b1463211e.js" crossorigin="anonymous"></script>
     <script src="/static/js/admin/usermanage.js" th:src="@{/js/admin/usermanage.js}" defer></script>
-    <style>
-        table {
-            width: 100%;
-            max-width: 1300px;
-            min-width: 1200px;
-            margin: 50px auto;
-        }
-    </style>
 </head>
 <body>
     <th:block th:replace="~{main/header :: header}"></th:block>
     <th:block th:replace="~{admin/adminNav :: adminNav}"></th:block>
-    <table border="1px">
-            <thead>
-                <tr>
-                    <td>이메일</td>
-                    <td>이름</td>
-                    <td>생년월일</td>
-                    <td>전화번호</td>
-                    <td>구분</td>
-                    <td>관리</td>
-                </tr>
-            </thead>
-            <tbody id="user_info_container">
-            </tbody>
-    </table>
+    <section>
+        <article>
+            <table>
+                    <thead>
+                        <tr>
+                            <td>이메일</td>
+                            <td>이름</td>
+                            <td>생년월일</td>
+                            <td>전화번호</td>
+                            <td>구분</td>
+                            <td>관리</td>
+                        </tr>
+                    </thead>
+                    <tbody id="user_info_container">
+                    </tbody>
+            </table>
+        </article>
+    </section>
     <th:block th:replace="~{main/footer :: footer}"></th:block>
 </body>
 </html>

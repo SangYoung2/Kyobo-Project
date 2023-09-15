@@ -6,23 +6,32 @@
 <head>
     <meta charset="UTF-8">
     <meta th:name="${_csrf.parameterName}" th:content="${_csrf.token}">
-    <title>Title</title>
+    <title>제품 정보 수정</title>
     <script src="https://kit.fontawesome.com/8b1463211e.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="/static/css/main/header.css" th:href="@{/css/main/header.css}">
+	<link rel="stylesheet" href="/static/css/admin/adminNav.css" th:href="@{/css/admin/adminNav.css}">
+	<link rel="stylesheet" href="/static/css/main/footer.css" th:href="@{/css/main/footer.css}">
+	<link rel="stylesheet" href="/static/css/admin/bookmodify.css" th:href="@{/css/admin/bookmodify.css}">
 </head>
 <body>
-	<form action="/admin/bookmodify" method="post" enctype="multipart/form-data">
-		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-		메인 이미지 파일: <input th:type="file" th:name="mainImageFile" accept="image/*"> <br/>
-		컨텐츠 이미지 파일: <input th:type="file" th:name="contentsImageFile" accept="image/*"> <br/>
-		ISBN: <input th:type="text" th:name="bookVO.ISBN" th:value="${bookVO.ISBN}" th:readonly> <br/>
-		TITLE: <input th:type="text" th:name="bookVO.title" th:value="${bookVO.title}"> <br/>
-		AUTHOR: <input th:type="text" name="bookVO.author" th:value="${bookVO.author}"> <br/>
-		PUBLISHER: <input th:type="text" name="bookVO.publisher" th:value="${bookVO.publisher}"> <br/>
-		CONTENTS: <textarea th:type="text" th:name="bookVO.contents" th:text="${bookVO.contents}"></textarea> <br/>
-		INTRODUCE: <textarea th:type="text" th:name="bookVO.introduce" th:text="${bookVO.introduce}"></textarea> <br/>
-		PRICE: <input th:type="number" th:name="bookVO.price" th:value="${bookVO.price}"> <br/>
-		<input type="submit" value="수정하기">
-	</form>
-	<a href="/admin/manage">관리페이지로 이동하기</a>
+	<th:block th:replace="~{main/header :: header}"></th:block>
+	<th:block th:replace="~{admin/adminNav :: adminNav}"></th:block>
+	<article class="contents_upload_wrap">
+		<h2>제품 수정</h2>
+		<form action="/admin/bookmodify" method="post" enctype="multipart/form-data">
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+			<div><span>도서번호</span> <input th:type="text" th:name="bookVO.ISBN" th:value="${bookVO.ISBN}" readonly></div>
+			<div><span>제목</span> <input th:type="text" th:name="bookVO.title" th:value="${bookVO.title}"></div>
+			<div><span>작가</span> <input th:type="text" name="bookVO.author" th:value="${bookVO.author}"></div>
+			<div><span>출판사</span> <input th:type="text" name="bookVO.publisher" th:value="${bookVO.publisher}"></div>
+			<div><span>목차</span> <textarea th:type="text" th:name="bookVO.contents" th:text="${bookVO.contents}"></textarea></div>
+			<div><span>소개글</span> <textarea th:type="text" th:name="bookVO.introduce" th:text="${bookVO.introduce}"></textarea></div>
+			<div><span>가격</span> <input th:type="number" th:name="bookVO.price" th:value="${bookVO.price}"></div>
+			<div><span>메인 이미지 파일</span> <input th:type="file" th:name="mainImageFile" accept="image/*"></div>
+			<div><span>컨텐츠 이미지 파일</span> <input th:type="file" th:name="contentsImageFile" accept="image/*"></div>
+			<input type="submit" value="수정하기">
+		</form>
+	</article>
+	<th:block th:replace="~{main/footer :: footer}"></th:block>
 </body>
 </html>
