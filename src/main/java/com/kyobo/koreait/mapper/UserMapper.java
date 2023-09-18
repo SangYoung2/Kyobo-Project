@@ -44,4 +44,7 @@ public interface UserMapper {
     // 주문 내역 추가하기
     boolean insert_order(List<CartVO> cartVOS);
 
+    // 주문 갯수 만큼 제품 총 주문량 추가
+    boolean update_bookCount(List<CartVO> cartVOS);
+
 }

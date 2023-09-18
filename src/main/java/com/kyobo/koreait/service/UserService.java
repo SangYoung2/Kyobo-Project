@@ -102,11 +102,13 @@ public class UserService {
         boolean paymentSucceed = userMapper.insert_payment(paymentVO);
         // 주문 내역에 추가하기
         boolean orderSucceed = userMapper.insert_order(cartVOS);
+        // 주문 내역의 제품 구매 갯수 만큼 제품 주문량 추가
+        boolean bookCountChangSucceed = userMapper.update_bookCount(cartVOS);
         // 장바구니에 있는 내역 삭제하기
         boolean removeSucceed = delete_book_in_cart(userEmail, cartVOS);
         
         // 최종 결과 반환
-        return paymentSucceed && orderSucceed && removeSucceed;
+        return paymentSucceed && orderSucceed && bookCountChangSucceed && removeSucceed;
     }
 
 }

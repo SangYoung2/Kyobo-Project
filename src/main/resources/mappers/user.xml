@@ -79,6 +79,14 @@
         </foreach>
     </insert>
 
+    <update id="update_bookCount" parameterType="list">
+        UPDATE `book_tbl` SET
+        <foreach collection="list" item="cartVO" separator=",">
+            `orderCount` = `orderCount` + #{cartVO.bookCount}
+            WHERE `book_tbl`.`ISBN` = #{cartVO.bookISBN}
+        </foreach>
+    </update>
+
     <select id="get_order" resultType="com.kyobo.koreait.domain.vos.dtos.CartDTO">
         SELECT `ORDER`.bookISBN, `ORDER`.bookCount, `BOOK`.title, `BOOK`.price FROM `order_tbl` `ORDER`
         INNER JOIN `book_tbl` `BOOK`
