@@ -36,7 +36,7 @@
 			<b>내용</b><br/>
 			<div class="book_detail_content" >
 				<div th:each="content: ${bookVO.contents.split('\n')}">
-					<div th:text="${content}"></div>
+					<span th:text="${content}"></span>
 				</div>
 			</div>
 		</div>
