@@ -13,20 +13,35 @@
     text-align: center;
 }
 
-.book_detail_view_area {
+.book_detail_img > img {
+    border: 1px solid lightgray;
+}
+
+.book_detail_view_area,
+.book_detail_introduce,
+.book_detail_contents {
     margin: 50px 0;
+}
+
+.book_detail_view_area {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.book_detail_content {
-    height: 300px;
+.book_detail_introduce > div {
+    margin-top: 10px;
+ }
+
+.book_detail_contents {
+    max-height: 300px;
     overflow: hidden;
+    transition: 2s ease;
 }
 
-.book_detail_content.on {
-    height: auto;
+.book_detail_content > div {
+    height: 30px;
+    line-height: 30px;
 }
 
 .view_btn {

@@ -21,15 +21,17 @@
 		<div class="book_detail_view_area">
 			<div>
 				<div class="book_detail_author"><b>저자:</b>  [[${bookVO.author}]]</div>
-				<div class="book)detail_publisher"><b>출판사:</b>  [[${bookVO.publisher}]]</div>
+				<div class="book_detail_publisher"><b>출판사:</b>  [[${bookVO.publisher}]]</div>
 			</div>
 			<div class="book_detail_img"><img th:src="@{https://kyobo-s3-bucket.s3.ap-northeast-2.amazonaws.com/img/book/} + ${bookVO.ISBN} + '/' + contents.jpg"  alt="책이미지"></div>
 			<div class="book_detail_price"><b>가격:</b> [[${bookVO.price}]]</div>
 		</div>
+		<hr>
 		<div class="book_detail_introduce">
 			<b>소개</b><br/>
-			[[${bookVO.introduce}]]
+			<div>[[${bookVO.introduce}]]</div>
 		</div>
+		<hr>
 		<div class="book_detail_contents">
 			<b>내용</b><br/>
 			<div class="book_detail_content" >
@@ -37,8 +39,8 @@
 					<div th:text="${content}"></div>
 				</div>
 			</div>
-			<span class="view_btn">더보기</span>
 		</div>
+		<span class="view_btn">더보기</span>
 	</section>
 	<th:block th:replace="~{main/footer :: footer}"></th:block>
 </body>
