@@ -21,13 +21,13 @@
 		<h2>제품 등록</h2>
 		<form action="/admin/upload" method="post" enctype="multipart/form-data">
 			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-			<div><span>ISBN</span> <input type="text" name="bookVO.ISBN"></div>
-			<div><span>TITLE</span> <input type="text" name="bookVO.title"></div>
-			<div><span>AUTHOR</span> <input type="text" value="" name="bookVO.author"></div>
-			<div><span>PUBLISHER</span> <input type="text" value="" name="bookVO.publisher"></div>
-			<div><span>CONTENTS</span> <textarea type="text" name="bookVO.contents"></textarea></div>
-			<div><span>INTRODUCE</span> <textarea type="text" name="bookVO.introduce"></textarea></div>
-			<div><span>PRICE</span> <input type="number" name="bookVO.price"></div>
+			<div><span>도서번호</span> <input type="text" name="bookVO.ISBN"></div>
+			<div><span>제목</span> <input type="text" name="bookVO.title"></div>
+			<div><span>작가</span> <input type="text" value="" name="bookVO.author"></div>
+			<div><span>출판사</span> <input type="text" value="" name="bookVO.publisher"></div>
+			<div><span>내용</span> <textarea type="text" name="bookVO.contents"></textarea></div>
+			<div><span>소개글</span> <textarea type="text" name="bookVO.introduce"></textarea></div>
+			<div><span>가격</span> <input type="number" name="bookVO.price"></div>
 			<div><span>메인 이미지 파일</span> <input type="file" name="mainImageFile" accept="image/*"></div>
 			<div><span>컨텐츠 이미지 파일</span> <input type="file" name="contentsImageFile" accept="image/*"></div>
 			<input type="submit" value="게시하기">
