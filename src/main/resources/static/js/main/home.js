@@ -134,6 +134,7 @@ function get_all_books_by_condition(searchKeyword, order, pagePerArticle, nowPag
         .then(value => {
             create_book_list(value);
             create_list_of_paging(value);
+            window.scroll(0,0);
         })
         .catch(reason => {console.log(reason)})
 }

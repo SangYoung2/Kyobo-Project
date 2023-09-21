@@ -36,7 +36,6 @@
 .book_detail_contents {
     max-height: 300px;
     overflow: hidden;
-    transition: 2s ease;
 }
 
 .book_detail_content > div {
