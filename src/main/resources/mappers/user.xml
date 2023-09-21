@@ -80,9 +80,12 @@
     </insert>
 
     <update id="update_bookCount" parameterType="list">
-        UPDATE `book_tbl` SET
-        <foreach collection="list" item="cartVO" separator=",">
-            `orderCount` = `orderCount` + #{cartVO.bookCount}
+        <!--
+           다중 update를 실행하기 위해서는 application.properties 파일에 sql url 문구
+           맨 뒤에 '?allowMultiQueries=true'를 추가해야만 다중 update가 가능하다.
+       -->
+        <foreach collection="list" item="cartVO" separator=";" close=";">
+            UPDATE `book_tbl` SET `orderCount` = `orderCount` + #{cartVO.bookCount}
             WHERE `book_tbl`.`ISBN` = #{cartVO.bookISBN}
         </foreach>
     </update>

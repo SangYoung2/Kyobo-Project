@@ -18,6 +18,17 @@
         `author` LIKE CONCAT('%', #{searchKeyword} ,'%')
         OR
         `publisher` LIKE CONCAT('%', #{searchKeyword} ,'%')
-        ORDER BY ${order}
+        <choose>
+            <!--
+                when문구에서 test에서 문자열 비교를 위해서는 작은따옴표('')로 감싼 후
+                비교문구를 큰따옴표로 감싸서 비교, 파라미터 값은 그냥 파마리터 명으로 입력
+            -->
+            <when test='order == "title"' >
+                ORDER BY ${order}
+            </when>
+            <otherwise>
+                ORDER BY ${order}  DESC
+            </otherwise>
+        </choose>
     </select>
 </mapper>
